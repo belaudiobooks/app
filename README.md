@@ -8,11 +8,14 @@ In case you are new in KMP it is highly recommended to pass this two tutorials:
 * [Get started with Compose Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-getting-started.html)
 * [Create a multiplatform app using Ktor and SQLDelight](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-ktor-sqldelight.html)
 
-Application will utilize https://audiobooks.by/data.json file as a datasource. Data source contract description: https://github.com/belaudiobooks/website/blob/main/tests/schema.data.json
+More samples of KMP projects: https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-samples.html
 
-## Development environment
+Application will utilize https://audiobooks.by/data.json file as a datasource. Datasource contract description: https://github.com/belaudiobooks/website/blob/main/tests/schema.data.json
 
-tbd...
+## Supported API versions
+
+**Android** - tbd...
+**iOS** - tbd...
 
 ## Project structure
 
@@ -31,6 +34,21 @@ Following [Kotlin Multiplatform Wizard](https://kmp.jetbrains.com/) generated st
 * `/shared` is for the code that will be shared between all targets in the project.
   The most important subfolder is `commonMain`. If preferred, you can add code to the platform-specific folders here too.
 
-## Build and run
+## Development environment
 
 tbd...
+
+## Test, build, run...
+
+Run tests:
+```
+./gradlew test
+```
+
+tbd...
+
+## Libraries
+
+* [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) - json serialization
+* [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) - date/time library
+* [Ktor](https://ktor.io/docs/getting-started-ktor-client-multiplatform-mobile.html) - http client
