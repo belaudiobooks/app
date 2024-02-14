@@ -15,6 +15,7 @@ Application will utilize https://audiobooks.by/data.json file as a datasource. D
 ## Supported API versions
 
 **Android** - tbd...
+
 **iOS** - tbd...
 
 ## Project structure
@@ -52,3 +53,4 @@ tbd...
 * [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) - json serialization
 * [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) - date/time library
 * [Ktor](https://ktor.io/docs/getting-started-ktor-client-multiplatform-mobile.html) - http client
+* [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - coroutines support
