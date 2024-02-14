@@ -13,7 +13,7 @@ import io.ktor.serialization.kotlinx.json.json
 class SiteApi {
 
     companion object {
-        const val ADDR = "https://audiobooks.by/data.json"
+        const val ADDR = "https://audiobooksbysite.ew.r.appspot.com/data.json"
         const val USER_AGENT = "audiobooks.by mob app"
     }
 
