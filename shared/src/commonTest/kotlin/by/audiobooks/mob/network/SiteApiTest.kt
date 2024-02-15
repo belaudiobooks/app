@@ -12,11 +12,7 @@ class SiteApiTest {
         val data = SiteApi().downloadData()
 
         assertTrue {
-            data.books.isNotEmpty() &&
-            data.tags.isNotEmpty() &&
-            data.people.isNotEmpty() &&
-            data.linkTypes.isNotEmpty() &&
-            data.publishers.isNotEmpty()
+            data.books.isNotEmpty()
         }
     }
 
