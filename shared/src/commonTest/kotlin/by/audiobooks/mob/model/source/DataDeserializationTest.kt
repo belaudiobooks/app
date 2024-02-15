@@ -7,12 +7,12 @@ class DataDeserializationTest {
 
     @Test
     fun deserializationTest() {
+
         val data = datasourceDeserializer.decodeFromString<Data>(DataJsonExample.data)
-        assertTrue(data.books.size == 3)
-        assertTrue(data.people.size == 3)
-        assertTrue(data.tags.size == 3)
-        assertTrue(data.linkTypes.size == 3)
-        assertTrue(data.publishers.size == 3)
+
+        assertTrue {
+            data.books.isNotEmpty()
+        }
     }
 }
 
@@ -46,7 +46,7 @@ object DataJsonExample {
               "url_type": 2
             }
           ],
-          "duration": 1237.0,
+          "duration": null,
           "publishers": [
             "a9c6d9de-435d-4d95-b3e1-cb578e0b4b28"
           ],

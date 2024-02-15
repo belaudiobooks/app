@@ -2,6 +2,8 @@
 
 At this stage we assume application will represent highly available catalog with content from https://audiobooks.by/ for Android and iOS platforms.
 
+![Build](https://github.com/belaudiobooks/app/actions/workflows/build.yml/badge.svg)
+
 Application going to be implemented on [Kotlin Multiplatform Platform (KMP)](https://www.jetbrains.com/kotlin-multiplatform/) with separate UI part for each platform ([SwiftUI](https://developer.apple.com/xcode/swiftui/) for iOS and [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) for Android).
 
 In case you are new in KMP it is highly recommended to pass this two tutorials:
@@ -15,6 +17,7 @@ Application will utilize https://audiobooks.by/data.json file as a datasource. D
 ## Supported API versions
 
 **Android** - tbd...
+
 **iOS** - tbd...
 
 ## Project structure
@@ -52,3 +55,4 @@ tbd...
 * [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) - json serialization
 * [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) - date/time library
 * [Ktor](https://ktor.io/docs/getting-started-ktor-client-multiplatform-mobile.html) - http client
+* [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - coroutines support

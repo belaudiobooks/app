@@ -9,7 +9,7 @@ data class Narration(
     val uuid: String,
     val narrators: List<String>,
     val links: List<Link>,
-    val duration: Double,
+    val duration: Double = 0.0,
     val publishers: List<String>,
     val paid: Boolean,
     val language: Language,
