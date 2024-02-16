@@ -12,6 +12,6 @@ data class Book(
     val descriptionSource: String,
     val authors: List<String>,
     val slug: String,
-    val tag: List<Int>,
+    val tag: List<Long>,
     val narrations: List<Narration>,
 )

@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeSimulatorTest
 import java.io.ByteArrayOutputStream
 
@@ -5,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -37,6 +39,7 @@ kotlin {
             implementation(libs.ktor.contentEncoding)
             implementation(libs.ktor.json)
             implementation(libs.ktor.serialization)
+            implementation(libs.sqldelight.runtime)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -44,9 +47,16 @@ kotlin {
         }
         iosMain.dependencies {
             implementation(libs.ktor.darwin)
+            implementation(libs.sqldelight.nativeDriver)
         }
         androidMain.dependencies {
             implementation(libs.ktor.android)
+            implementation(libs.sqldelight.androidDriver)
+        }
+        val androidUnitTest by getting {
+            dependencies {
+                implementation(libs.sqldelight.jvm)
+            }
         }
     }
 
@@ -84,5 +94,19 @@ android {
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
+    }
+}
+
+sqldelight {
+    databases {
+        create("AudiobooksByDB") {
+            packageName.set("by.audiobooks.mob.cache")
+        }
+    }
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions {
+        freeCompilerArgs += "-Xexpect-actual-classes"
     }
 }

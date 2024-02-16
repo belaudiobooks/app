@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 data class Link(
     val url: String,
     @SerialName("url_type")
-    val urlType: Int
+    val urlType: Long
 )
