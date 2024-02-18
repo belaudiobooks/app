@@ -10,12 +10,14 @@ internal suspend fun AudiobooksByDB.deleteAllTags() = withContext(Dispatchers.De
 }
 
 internal suspend fun AudiobooksByDB.insertTag(tag: by.audiobooks.mob.model.source.Tag) = withContext(Dispatchers.Default) {
-    tagQueries.insertTag(
-        id = tag.id,
-        name = tag.name,
-        slug = tag.slug,
-        description = tag.description
-    )
+    tagQueries.transaction {
+        tagQueries.insertTag(
+            id = tag.id,
+            name = tag.name,
+            slug = tag.slug,
+            description = tag.description
+        )
+    }
 }
 
 internal suspend fun AudiobooksByDB.getAllTags(): List<by.audiobooks.mob.model.source.Tag> = withContext(Dispatchers.Default) {
