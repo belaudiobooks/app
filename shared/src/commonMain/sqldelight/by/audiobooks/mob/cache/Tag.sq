@@ -1,0 +1,20 @@
+
+CREATE TABLE Tag (
+    id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    slug TEXT NOT NULL,
+    description TEXT NOT NULL
+);
+
+insertTag:
+INSERT INTO Tag(id, name, slug, description)
+VALUES (?, ?, ?, ?);
+
+deleteAllTags:
+DELETE FROM Tag;
+
+selectAllTags:
+SELECT * FROM Tag;
+
+slectTagById:
+SELECT * FROM Tag WHERE id = :tag_id;

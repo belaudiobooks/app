@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Tag(
-    val id: Int,
+    val id: Long,
     val name: String,
     val slug: String,
     val description: String

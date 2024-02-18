@@ -43,12 +43,20 @@ tbd...
 
 ## Test, build, run...
 
-Run tests:
+Clean:
 ```
-./gradlew test
+./gradlew clean
 ```
 
-tbd...
+Build (including tests for both platforms):
+```
+./gradlew build --stacktrace
+```
+
+Generate Kotlin classes:
+```
+./gradlew generateSqlDelightInterface
+```
 
 ## Libraries
 
@@ -56,3 +64,4 @@ tbd...
 * [kotlinx-datetime](https://github.com/Kotlin/kotlinx-datetime) - date/time library
 * [Ktor](https://ktor.io/docs/getting-started-ktor-client-multiplatform-mobile.html) - http client
 * [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - coroutines support
+* [SQLDelight](https://cashapp.github.io/sqldelight/2.0.1/multiplatform_sqlite/) - data cache
