@@ -1,0 +1,21 @@
+
+CREATE TABLE LinkType (
+    id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    caption TEXT NOT NULL,
+    icon TEXT NOT NULL,
+    availability TEXT NOT NULL
+);
+
+insertLinkType:
+INSERT INTO LinkType(id, name, caption, icon, availability)
+VALUES (?, ?, ?, ?, ?);
+
+deleteAllLinkTypes:
+DELETE FROM LinkType;
+
+selectAllLinkTypes:
+SELECT * FROM LinkType;
+
+selectLinkTypeById:
+SELECT * FROM LinkType WHERE id = :link_type_id;
