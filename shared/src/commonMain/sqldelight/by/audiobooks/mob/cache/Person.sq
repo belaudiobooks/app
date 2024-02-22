@@ -1,0 +1,24 @@
+
+CREATE TABLE Person (
+    uuid TEXT NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    description_source TEXT NOT NULL,
+    photo TEXT NOT NULL,
+    photo_source TEXT NOT NULL,
+    slug TEXT NOT NULL,
+    gender TEXT NOT NULL
+);
+
+insertPerson:
+INSERT INTO Person(uuid, name, description, description_source, photo, photo_source, slug, gender)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+
+deleteAllPerson:
+DELETE FROM Person;
+
+selectAllPerson:
+SELECT * FROM Person;
+
+selectPersonByUuid:
+SELECT * FROM Person WHERE uuid = :person_uuid;

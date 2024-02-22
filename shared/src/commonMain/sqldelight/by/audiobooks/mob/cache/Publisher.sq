@@ -1,0 +1,22 @@
+
+CREATE TABLE Publisher (
+    uuid TEXT NOT NULL,
+    name TEXT NOT NULL,
+    slug TEXT NOT NULL,
+    url TEXT NOT NULL,
+    logo TEXT NOT NULL,
+    description TEXT NOT NULL
+);
+
+insertPublisher:
+INSERT INTO Publisher(uuid, name, slug, url, logo, description)
+VALUES (?, ?, ?, ?, ?, ?);
+
+deleteAllPublishers:
+DELETE FROM Publisher;
+
+selectAllPublishers:
+SELECT * FROM Publisher;
+
+selectPublisherByUuid:
+SELECT * FROM Publisher WHERE uuid = :publisher_uuid;
