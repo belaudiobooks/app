@@ -40,6 +40,7 @@ kotlin {
             implementation(libs.ktor.json)
             implementation(libs.ktor.serialization)
             implementation(libs.sqldelight.runtime)
+            implementation(libs.sqldelight.coroutines)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -50,7 +51,7 @@ kotlin {
             implementation(libs.sqldelight.nativeDriver)
         }
         androidMain.dependencies {
-            implementation(libs.ktor.android)
+            implementation(libs.ktor.okhttp)
             implementation(libs.sqldelight.androidDriver)
         }
         val androidUnitTest by getting {
