@@ -7,11 +7,9 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.UserAgent
 import io.ktor.client.plugins.compression.ContentEncoding
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.request.HttpRequestPipeline
 import io.ktor.client.request.HttpSendPipeline
 import io.ktor.client.request.get
 import io.ktor.http.HttpHeaders
-import io.ktor.http.headers
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -21,9 +19,9 @@ import kotlin.random.Random
 class SiteApi {
 
     companion object {
-        const val HOST = "audiobooksbysite.ew.r.appspot.com"
-        const val USER_AGENT = "audiobooks.by mob app"
-        const val CHAR_POOL = "abcdefghijklmnopqrstuvwxyz0123456789"
+        private const val HOST = "audiobooksbysite.ew.r.appspot.com"
+        private const val USER_AGENT = "audiobooks.by mob app"
+        private const val CHAR_POOL = "abcdefghijklmnopqrstuvwxyz0123456789"
     }
 
     private val httpClient = HttpClient {
@@ -45,8 +43,7 @@ class SiteApi {
 
     suspend fun downloadData(): Data =
         withContext(Dispatchers.IO) {
-            httpClient.get(getRandomAddress()) {
-            }.body()
+            httpClient.get(getRandomAddress()).body()
         }
 
     private fun getRandomAddress(): String {
@@ -55,5 +52,4 @@ class SiteApi {
             .map { CHAR_POOL[it] }.joinToString(separator = "")
         return "https://${randomDomain}.appspot.com/data.json"
     }
-
 }
