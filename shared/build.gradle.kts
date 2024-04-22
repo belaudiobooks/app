@@ -50,7 +50,7 @@ kotlin {
             implementation(libs.sqldelight.nativeDriver)
         }
         androidMain.dependencies {
-            implementation(libs.ktor.android)
+            implementation(libs.ktor.okhttp)
             implementation(libs.sqldelight.androidDriver)
         }
         val androidUnitTest by getting {
