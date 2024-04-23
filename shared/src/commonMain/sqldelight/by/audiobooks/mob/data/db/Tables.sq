@@ -1,0 +1,91 @@
+
+CREATE TABLE T_Tag (
+    id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    slug TEXT NOT NULL,
+    description TEXT NOT NULL
+);
+
+CREATE TABLE T_Publisher (
+    uuid TEXT NOT NULL,
+    name TEXT NOT NULL,
+    slug TEXT NOT NULL,
+    url TEXT NOT NULL,
+    logo TEXT NOT NULL,
+    description TEXT NOT NULL
+);
+
+CREATE TABLE T_Person (
+    uuid TEXT NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    description_source TEXT NOT NULL,
+    photo TEXT NOT NULL,
+    photo_source TEXT NOT NULL,
+    slug TEXT NOT NULL,
+    gender TEXT NOT NULL
+);
+
+CREATE TABLE T_LinkType (
+    id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    caption TEXT NOT NULL,
+    icon TEXT NOT NULL,
+    availability TEXT NOT NULL
+);
+
+CREATE TABLE T_Book (
+    uuid TEXT NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    description_source TEXT NOT NULL,
+    slug TEXT NOT NULL
+);
+
+CREATE TABLE JT_Book_Author (
+    book_uuid TEXT NOT NULL,
+    person_uuid TEXT NOT NULL,
+    priority INTEGER NOT NULL
+);
+
+CREATE TABLE JT_Book_Tag (
+    book_uuid TEXT NOT NULL,
+    tag_id INTEGER NOT NULL
+);
+
+CREATE TABLE T_Narration (
+    uuid TEXT NOT NULL,
+    book_uuid TEXT NOT NULL,
+    duration REAL NOT NULL,
+    paid  TEXT NOT NULL,
+    language TEXT NOT NULL,
+    cover_image TEXT NOT NULL,
+    cover_image_source TEXT NOT NULL,
+    date TEXT NOT NULL,
+    description TEXT NOT NULL,
+    preview_url TEXT NOT NULL
+);
+
+CREATE TABLE T_NarrationLink (
+    narration_uuid TEXT NOT NULL,
+    url TEXT NOT NULL,
+    url_type INTEGER NOT NULL
+);
+
+CREATE TABLE JT_Narration_Narrator (
+    narration_uuid TEXT NOT NULL,
+    person_uuid TEXT NOT NULL,
+    priority INTEGER NOT NULL
+);
+
+CREATE TABLE JT_Narration_Translator (
+    narration_uuid TEXT NOT NULL,
+    person_uuid TEXT NOT NULL,
+    priority INTEGER NOT NULL
+);
+
+CREATE TABLE JT_Narration_Publisher (
+    narration_uuid TEXT NOT NULL,
+    publisher_uuid TEXT NOT NULL,
+    priority INTEGER NOT NULL
+);

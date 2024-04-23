@@ -1,0 +1,12 @@
+
+selectAllBooks:
+SELECT T_Book.uuid AS bookUuid,
+        T_Book.title AS bookTitle,
+        T_Book.description AS bookDescription,
+        T_Book.description_source AS bookDescriptionSource,
+        JT_Book_Author.person_uuid AS authorUuid,
+        JT_Book_Author.priority AS authorPriority,
+        JT_Book_Tag.tag_id AS bookTag
+     FROM T_Book
+LEFT JOIN JT_Book_Author ON T_Book.uuid = JT_Book_Author.book_uuid
+LEFT JOIN JT_Book_Tag ON T_Book.uuid = JT_Book_Tag.book_uuid;

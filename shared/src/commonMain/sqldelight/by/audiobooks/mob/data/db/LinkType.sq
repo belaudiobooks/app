@@ -1,0 +1,8 @@
+
+selectAllLinkTypes:
+SELECT T_LinkType.id AS linkTypeId,
+        T_LinkType.name AS linkTypeName,
+        T_LinkType.caption AS linkTypeCaption,
+        T_LinkType.icon AS linkTypeIcon,
+        T_LinkType.availability AS linkTypeAvailability
+  FROM T_LinkType;
