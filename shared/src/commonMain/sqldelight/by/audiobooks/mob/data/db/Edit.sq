@@ -1,0 +1,118 @@
+
+-- T_Tag:
+
+insertTag:
+INSERT INTO T_Tag(id, name, slug, description)
+VALUES (?, ?, ?, ?);
+
+deleteAllTags:
+DELETE FROM T_Tag;
+
+-- T_Publisher:
+
+insertPublisher:
+INSERT INTO T_Publisher(uuid, name, slug, url, logo, description)
+VALUES (?, ?, ?, ?, ?, ?);
+
+deleteAllPublishers:
+DELETE FROM T_Publisher;
+
+-- T_Person:
+
+insertPerson:
+INSERT INTO T_Person(uuid, name, description, description_source, photo, photo_source, slug, gender)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+
+deleteAllPerson:
+DELETE FROM T_Person;
+
+-- T_LinkType:
+
+insertLinkType:
+INSERT INTO T_LinkType(id, name, caption, icon, availability)
+VALUES (?, ?, ?, ?, ?);
+
+deleteAllLinkTypes:
+DELETE FROM T_LinkType;
+
+-- T_Book:
+
+insertBook:
+INSERT INTO T_Book(uuid, title, description, description_source, slug)
+VALUES (?, ?, ?, ?, ?);
+
+deleteAllBooks:
+DELETE FROM T_Book;
+
+-- T_Narration:
+
+insertNarration:
+INSERT INTO T_Narration(
+    uuid,
+    book_uuid,
+    duration,
+    paid,
+    language,
+    cover_image,
+    cover_image_source,
+    date,
+    description,
+    preview_url
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+deleteAllNarrations:
+DELETE FROM T_Narration;
+
+-- T_NarrationLink:
+
+addNarrationLink:
+INSERT INTO  T_NarrationLink(narration_uuid, url, url_type)
+VALUES (?, ?, ?);
+
+deleteAllNarrationLinks:
+DELETE FROM T_NarrationLink;
+
+-- JT_Book_Author:
+
+addBookAuthor:
+INSERT INTO JT_Book_Author(book_uuid, person_uuid, priority)
+VALUES (?, ?, ?);
+
+deleteAllBookAuthors:
+DELETE FROM JT_Book_Author;
+
+-- JT_Book_Tag:
+
+addBookTag:
+INSERT INTO JT_Book_Tag(book_uuid, tag_id)
+VALUES (?, ?);
+
+deleteAllBookTags:
+DELETE FROM JT_Book_Tag;
+
+-- JT_Narration_Narrator:
+
+addNarrator:
+INSERT INTO  JT_Narration_Narrator(narration_uuid, person_uuid, priority)
+VALUES (?, ?, ?);
+
+deleteAllNarrationNarrators:
+DELETE FROM JT_Narration_Narrator;
+
+-- JT_Narration_Translator:
+
+addTranslator:
+INSERT INTO  JT_Narration_Translator(narration_uuid, person_uuid, priority)
+VALUES (?, ?, ?);
+
+deleteAllNarrationTranslators:
+DELETE FROM JT_Narration_Translator;
+
+-- JT_Narration_Publisher:
+
+addPublisher:
+INSERT INTO  JT_Narration_Publisher(narration_uuid, publisher_uuid, priority)
+VALUES (?, ?, ?);
+
+deleteAllNarrationPublishers:
+DELETE FROM JT_Narration_Publisher;

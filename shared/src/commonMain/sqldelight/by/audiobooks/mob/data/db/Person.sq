@@ -1,0 +1,10 @@
+
+selectAllPersons:
+SELECT T_Person.uuid AS personUuid,
+        T_Person.name AS personName,
+        T_Person.description AS personDescription,
+        T_Person.description_source AS personDescriptionSource,
+        T_Person.photo AS personPhoto,
+        T_Person.photo_source AS personPhotoSource,
+        T_Person.gender AS personGender
+ FROM T_Person;

@@ -40,6 +40,7 @@ kotlin {
             implementation(libs.ktor.json)
             implementation(libs.ktor.serialization)
             implementation(libs.sqldelight.runtime)
+            implementation(libs.sqldelight.coroutines)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -100,7 +101,7 @@ android {
 sqldelight {
     databases {
         create("AudiobooksByDB") {
-            packageName.set("by.audiobooks.mob.cache")
+            packageName.set("by.audiobooks.mob.data.db")
         }
     }
 }
