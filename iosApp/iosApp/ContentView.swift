@@ -1,53 +1,56 @@
 import SwiftUI
-import Combine
-import Shared
 
 struct ContentView: View {
-    @State private var homeViewModel: HomeViewModel = Koin.instance.get()
-    @State var state: HomeScreenUiState = HomeScreenUiState.Loading(books: [])
-    @State private var showContent = false
+    struct Success {
+        var showContent: Bool
+        let greeting: String
+    }
+    
+    struct Error {
+        let reason: String
+    }
+    
+    // Could be replaced by StateHolder
+    @ObservedObject var viewModel: ContentViewModel
+    
     var body: some View {
         VStack {
-            Button("Click me!") {
-                homeViewModel.reloadData()
-                withAnimation {
-                    showContent = !showContent
+            switch viewModel.state {
+            // Handle successful state
+            case let .success(successState):
+                if successState.showContent {
+                    VStack(spacing: 16) {
+                        Image(systemName: "swift")
+                            .font(.system(size: 200))
+                            .foregroundColor(.accentColor)
+                        Text("SwiftUI: \(successState.greeting)")
+                    }
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                } else {
+                    Text("Hidden...")
                 }
+               
+            // Handle error state
+            case let .error(errorState):
+                Text("Error: \(errorState.reason)")
+                
+            // Handle loading state
+            case  .loading:
+                Text("Loading...")
             }
-            
-            if state is HomeScreenUiState.Success {
-                Text("Success")
-                let s = state as! HomeScreenUiState.Success
-                ForEach(s.books, id: \.uuid) { book in
-                    Text(book.title)
-                }
-            } else {
-                Text("Loading or Error")
-            }
-
-            if showContent {
-                VStack(spacing: 16) {
-                    Image(systemName: "swift")
-                        .font(.system(size: 200))
-                        .foregroundColor(.accentColor)
-                    Text("SwiftUI: \(Greeting().greet())")
-                }
-                .transition(.move(edge: .top).combined(with: .opacity))
-            }
-            
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .padding()
-        .task {
-            for await stateData in homeViewModel.uiState {
-                state = stateData
-            }
-        }
+      
+      Button("Click me!") {
+          viewModel.handle(action: .didTapShowContent)
+      }
+      .padding(.bottom, 200)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(viewModel: ContentViewModel(state: .success(.init(showContent: true, greeting: "Hello"))))
     }
 }
