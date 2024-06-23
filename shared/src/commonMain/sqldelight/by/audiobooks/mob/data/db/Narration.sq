@@ -1,0 +1,22 @@
+
+selectAllNarrations:
+SELECT T_Narration.uuid AS narrationUuid,
+        T_Narration.book_uuid AS bookUuid,
+        T_Narration.duration AS narrationDuration,
+        T_Narration.paid AS narrationPaid,
+        T_Narration.language AS narrationLanguage,
+        T_Narration.cover_image AS narrationCoverImage,
+        T_Narration.cover_image_source AS narrationCoverImageSource,
+        T_Narration.date AS narrationAddedDate,
+        T_Narration.description AS narrationDescription,
+        T_Narration.preview_url AS narrationPreviewUrl,
+        JT_Narration_Narrator.person_uuid AS narratorUuid,
+        JT_Narration_Narrator.priority AS narratorPriority,
+        JT_Narration_Publisher.publisher_uuid AS publisherUuid,
+        JT_Narration_Publisher.priority AS publisherPriority,
+        JT_Narration_Translator.person_uuid AS translatorUuid,
+        JT_Narration_Translator.priority AS translatorPriority
+FROM T_Narration
+LEFT JOIN JT_Narration_Narrator ON T_Narration.uuid = JT_Narration_Narrator.narration_uuid
+LEFT JOIN JT_Narration_Publisher ON T_Narration.uuid = JT_Narration_Publisher.narration_uuid
+LEFT JOIN JT_Narration_Translator ON T_Narration.uuid = JT_Narration_Translator.narration_uuid;

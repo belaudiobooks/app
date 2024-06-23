@@ -1,0 +1,6 @@
+
+selectAllLinks:
+SELECT T_NarrationLink.narration_uuid AS narrationUuid,
+        T_NarrationLink.url AS url,
+        T_NarrationLink.url_type AS linkTypeId
+   FROM T_NarrationLink;

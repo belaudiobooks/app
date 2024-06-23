@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.sqlDelight)
+    alias(libs.plugins.skie)
 }
 
 kotlin {
@@ -40,17 +41,24 @@ kotlin {
             implementation(libs.ktor.json)
             implementation(libs.ktor.serialization)
             implementation(libs.sqldelight.runtime)
+            implementation(libs.sqldelight.coroutines)
+            implementation(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.androidx.lifecycle.runtime)
+            implementation(libs.androidx.lifecycle.common)
+            implementation(libs.koin.core)
+            implementation(libs.napier)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.kotlin.coroutines.test)
+            implementation(libs.koin.test)
         }
         iosMain.dependencies {
-            implementation(libs.ktor.darwin)
-            implementation(libs.sqldelight.nativeDriver)
+                implementation(libs.ktor.darwin)
+                implementation(libs.sqldelight.nativeDriver)
         }
         androidMain.dependencies {
-            implementation(libs.ktor.android)
+            implementation(libs.ktor.okhttp)
             implementation(libs.sqldelight.androidDriver)
         }
         val androidUnitTest by getting {
@@ -100,7 +108,7 @@ android {
 sqldelight {
     databases {
         create("AudiobooksByDB") {
-            packageName.set("by.audiobooks.mob.cache")
+            packageName.set("by.audiobooks.mob.data.db")
         }
     }
 }

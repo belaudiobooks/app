@@ -1,0 +1,8 @@
+
+selectAllPublishers:
+SELECT T_Publisher.uuid AS publisherUuid,
+       T_Publisher.name AS publisherName,
+       T_Publisher.url AS publisherUrl,
+       T_Publisher.logo AS publisherLogo,
+       T_Publisher.description AS publisherDescription
+      FROM T_Publisher;
