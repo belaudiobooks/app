@@ -26,8 +26,28 @@ class BookRepoTest {
     }
 
     @Test
-    fun bookRepoTest() = runTest {
+    fun getAllBooksTest() = runTest {
         val state = dbHelper.database.getAllBooks(UnconfinedTestDispatcher()).stateIn(backgroundScope)
+        backgroundScope.launch(UnconfinedTestDispatcher()) { state.collect() }
+
+        // Verify DB is empty
+        assertEquals(0, state.value.size)
+
+        // Insert data snapshot & verify result got updated.
+        dbHelper.database.replaceData(DBTestData.testDataSnapshot)
+        runCurrent()
+        assertEquals(3, state.value.size)
+
+        // Insert additional data & verify result got updated.
+        dbHelper.database.insertBook(DBTestData.extraBook)
+        runCurrent()
+        assertEquals(4, state.value.size)
+    }
+
+    @Test
+    fun getNLatestNarrationAsBookCoversTest() = runTest {
+        val state = dbHelper.database.getNLatestNarrationAsBookCovers(4, UnconfinedTestDispatcher())
+            .stateIn(backgroundScope)
         backgroundScope.launch(UnconfinedTestDispatcher()) { state.collect() }
 
         // Verify DB is empty
