@@ -3,6 +3,7 @@ package by.audiobooks.mob.data.db
 import app.cash.sqldelight.db.SqlDriver
 import by.audiobooks.mob.data.network.dto.Data
 import by.audiobooks.mob.domain.Book
+import by.audiobooks.mob.domain.BookCover
 import by.audiobooks.mob.domain.Link
 import by.audiobooks.mob.domain.LinkType
 import by.audiobooks.mob.domain.Narration
@@ -23,6 +24,9 @@ class DatabaseHelper(sqlDriver: SqlDriver) {
     }
 
     fun getAllBooks(): Flow<List<Book>> = database.getAllBooks()
+
+    fun getNLatestNarrationsAsBookCovers(numberOfBookCovers: Long): Flow<List<BookCover>> =
+        database.getNLatestNarrationAsBookCovers(numberOfBookCovers)
 
     fun getAllNarrations(): Flow<List<Narration>> = database.getAllNarrations()
 
