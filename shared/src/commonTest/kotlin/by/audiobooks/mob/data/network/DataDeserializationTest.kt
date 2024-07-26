@@ -1,7 +1,7 @@
 package by.audiobooks.mob.data.network
 
 import by.audiobooks.mob.data.network.SiteApi.Companion.DESERIALIZATION_SETTINGS
-import by.audiobooks.mob.data.network.dto.Data
+import by.audiobooks.mob.data.network.dto.BackendDataSnapshot
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
@@ -10,7 +10,7 @@ class DataDeserializationTest {
     @Test
     fun deserializationTest() {
 
-        val data = DESERIALIZATION_SETTINGS.decodeFromString<Data>(DataJsonExample.data)
+        val data = DESERIALIZATION_SETTINGS.decodeFromString<BackendDataSnapshot>(DataJsonExample.data)
 
         assertTrue {
             data.books.isNotEmpty()

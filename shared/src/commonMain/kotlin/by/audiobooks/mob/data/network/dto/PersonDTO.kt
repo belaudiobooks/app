@@ -4,14 +4,15 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Book(
+data class PersonDTO(
     val uuid: String,
-    val title: String,
+    val name: String,
     val description: String,
     @SerialName("description_source")
     val descriptionSource: String,
-    val authors: List<String>,
+    val photo: String = "",
+    @SerialName("photo_source")
+    val photoSource: String,
     val slug: String,
-    val tag: List<Long>,
-    val narrations: List<Narration>,
+    val gender: GenderDTO
 )

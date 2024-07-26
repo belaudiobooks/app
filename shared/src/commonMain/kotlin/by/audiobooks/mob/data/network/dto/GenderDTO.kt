@@ -1,6 +1,6 @@
 package by.audiobooks.mob.data.network.dto
 
-enum class Gender {
+enum class GenderDTO {
     MALE,
     FEMALE,
     PLURAL
