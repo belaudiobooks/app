@@ -2,7 +2,9 @@ package by.audiobooks.mob.data.db
 
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
+import by.audiobooks.mob.domain.Availability
 import by.audiobooks.mob.domain.Link
+import by.audiobooks.mob.domain.LinkDetails
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
@@ -14,3 +16,26 @@ internal fun AudiobooksByDB.getAllLinks(context: CoroutineContext = Dispatchers.
         url = url,
         linkTypeId = linkTypeId
     ) }.asFlow().mapToList(context)
+
+internal fun AudiobooksByDB.getLinkDetailsByNarrationUuid(
+    narrationUuid: String,
+    context: CoroutineContext = Dispatchers.IO
+): Flow<List<LinkDetails>> =
+    linkQueries.selectLinkDetailsByNarrationUuid(narrationUuid) {
+    narrationUuid,
+    narrationLink,
+    linkTypeId,
+    linkTypeName,
+    linkTypeIcon,
+    linkTypeCaption,
+    linkTypeAvailability ->
+        LinkDetails(
+            narrationUuid = narrationUuid,
+            url = narrationLink,
+            linkTypeId = linkTypeId,
+            linkTypeName = linkTypeName,
+            linkTypeIcon = linkTypeIcon,
+            linkTypeCaption = linkTypeCaption,
+            linkTypeAvailability = Availability.valueOf(linkTypeAvailability)
+        )
+    }.asFlow().mapToList(context)
