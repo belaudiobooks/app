@@ -1,13 +1,13 @@
 package by.audiobooks.mob.data.db
 
-import by.audiobooks.mob.data.network.dto.Book
-import by.audiobooks.mob.data.network.dto.Data
-import by.audiobooks.mob.data.network.dto.LinkType
-import by.audiobooks.mob.data.network.dto.Person
-import by.audiobooks.mob.data.network.dto.Publisher
-import by.audiobooks.mob.data.network.dto.Tag
+import by.audiobooks.mob.data.network.dto.BookDTO
+import by.audiobooks.mob.data.network.dto.BackendDataSnapshot
+import by.audiobooks.mob.data.network.dto.LinkTypeDTO
+import by.audiobooks.mob.data.network.dto.PersonDTO
+import by.audiobooks.mob.data.network.dto.PublisherDTO
+import by.audiobooks.mob.data.network.dto.TagDTO
 
-fun AudiobooksByDB.replaceData(data: Data) {
+fun AudiobooksByDB.replaceData(data: BackendDataSnapshot) {
     editQueries.transaction {
         cleanUpDB()
         data.linkTypes.forEach { insertLinkType(it) }
@@ -33,7 +33,7 @@ internal fun AudiobooksByDB.cleanUpDB() {
         editQueries.deleteAllLinkTypes()
 }
 
-internal fun AudiobooksByDB.insertLinkType(linkType: LinkType) {
+internal fun AudiobooksByDB.insertLinkType(linkType: LinkTypeDTO) {
         editQueries.insertLinkType(
             id = linkType.id,
             name = linkType.name,
@@ -43,7 +43,7 @@ internal fun AudiobooksByDB.insertLinkType(linkType: LinkType) {
         )
 }
 
-internal fun AudiobooksByDB.insertTag(tag: Tag) {
+internal fun AudiobooksByDB.insertTag(tag: TagDTO) {
         editQueries.insertTag(
             id = tag.id,
             name = tag.name,
@@ -52,7 +52,7 @@ internal fun AudiobooksByDB.insertTag(tag: Tag) {
         )
 }
 
-internal fun AudiobooksByDB.insertPerson(person: Person) {
+internal fun AudiobooksByDB.insertPerson(person: PersonDTO) {
     editQueries.insertPerson(
             uuid = person.uuid,
             name = person.name,
@@ -65,7 +65,7 @@ internal fun AudiobooksByDB.insertPerson(person: Person) {
         )
 }
 
-internal fun AudiobooksByDB.insertPublisher(publisher: Publisher) {
+internal fun AudiobooksByDB.insertPublisher(publisher: PublisherDTO) {
     editQueries.insertPublisher(
         uuid = publisher.uuid,
         name = publisher.name,
@@ -76,7 +76,7 @@ internal fun AudiobooksByDB.insertPublisher(publisher: Publisher) {
     )
 }
 
-internal fun AudiobooksByDB.insertBook(book: Book) {
+internal fun AudiobooksByDB.insertBook(book: BookDTO) {
     editQueries.insertBook(
         uuid = book.uuid,
         title = book.title,

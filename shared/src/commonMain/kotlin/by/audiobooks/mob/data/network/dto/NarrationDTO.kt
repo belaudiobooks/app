@@ -5,14 +5,14 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Narration(
+data class NarrationDTO(
     val uuid: String,
     val narrators: List<String>,
-    val links: List<Link>,
+    val links: List<LinkDTO>,
     val duration: Double = 0.0,
     val publishers: List<String>,
     val paid: Boolean,
-    val language: Language,
+    val language: LanguageDTO,
     val translators: List<String>,
     @SerialName("cover_image")
     val coverImage: String = "",

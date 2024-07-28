@@ -3,9 +3,10 @@ package by.audiobooks.mob.data.network.dto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Tag(
+data class LinkTypeDTO(
     val id: Long,
     val name: String,
-    val slug: String,
-    val description: String
+    val caption: String,
+    val icon: String,
+    val availability: AvailabilityDTO
 )

@@ -1,6 +1,6 @@
 package by.audiobooks.mob.data.network
 
-import by.audiobooks.mob.data.network.dto.Data
+import by.audiobooks.mob.data.network.dto.BackendDataSnapshot
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.HttpRequestRetry
@@ -51,7 +51,7 @@ class SiteApi {
         }
     }
 
-    suspend fun downloadData(): Data =
+    suspend fun downloadData(): BackendDataSnapshot =
         withContext(Dispatchers.IO) {
             httpClient.get(getRandomAddress()).body()
         }

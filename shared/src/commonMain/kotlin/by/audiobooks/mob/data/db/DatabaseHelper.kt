@@ -1,7 +1,7 @@
 package by.audiobooks.mob.data.db
 
 import app.cash.sqldelight.db.SqlDriver
-import by.audiobooks.mob.data.network.dto.Data
+import by.audiobooks.mob.data.network.dto.BackendDataSnapshot
 import by.audiobooks.mob.domain.Book
 import by.audiobooks.mob.domain.BookCover
 import by.audiobooks.mob.domain.Link
@@ -19,7 +19,7 @@ class DatabaseHelper(sqlDriver: SqlDriver) {
 
     internal val database by lazy { AudiobooksByDB(sqlDriver) }
 
-    suspend fun replaceData(newData: Data): Unit = withContext(Dispatchers.IO) {
+    suspend fun replaceData(newData: BackendDataSnapshot): Unit = withContext(Dispatchers.IO) {
         database.replaceData(newData)
     }
 
