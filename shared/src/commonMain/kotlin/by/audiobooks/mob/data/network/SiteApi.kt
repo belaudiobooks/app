@@ -23,6 +23,7 @@ class SiteApi {
         private const val HOST = "audiobooksbysite.ew.r.appspot.com"
         private const val USER_AGENT = "audiobooks.by mob app"
         private const val CHAR_POOL = "abcdefghijklmnopqrstuvwxyz0123456789"
+        private const val STATIC_ADDRESS = "https://storage.googleapis.com/books_media/tmp_data.json"
         val DESERIALIZATION_SETTINGS = Json {
             // https://github.com/Kotlin/kotlinx.serialization/blob/master/docs/json.md#coercing-input-values
             coerceInputValues = true
@@ -53,7 +54,7 @@ class SiteApi {
 
     suspend fun downloadData(): BackendDataSnapshot =
         withContext(Dispatchers.IO) {
-            httpClient.get(getRandomAddress()).body()
+            httpClient.get(STATIC_ADDRESS).body()
         }
 
     private fun getRandomAddress(): String {
