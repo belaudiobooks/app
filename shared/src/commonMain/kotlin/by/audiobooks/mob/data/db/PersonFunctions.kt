@@ -36,6 +36,19 @@ internal fun AudiobooksByDB.getPersonByUuid(personUuid: String, context: Corouti
         )
     }.asFlow().mapToOne(context)
 
+internal fun AudiobooksByDB.getPersonByUuid(personUuid: String): Person? =
+    personQueries.selectPersonByUuid(personUuid) { personUuid, personName, personDescription, personDescriptionSource, personPhoto, personPhotoSource, personGender ->
+        Person(
+            uuid = personUuid,
+            name = personName,
+            description = personDescription,
+            descriptionSource = personDescriptionSource,
+            photo = personPhoto,
+            photoSource = personPhotoSource,
+            gender = Gender.valueOf(personGender)
+        )
+    }.executeAsOneOrNull()
+
 internal fun AudiobooksByDB.getAuthorsByBookUuid(bookUuid: String, context: CoroutineContext = Dispatchers.IO): Flow<List<Person>> =
     personQueries.selectAuthorsByBookUuid(bookUuid) { personUuid, personName, personDescription, personDescriptionSource, personPhoto, personPhotoSource, personGender ->
         Person(

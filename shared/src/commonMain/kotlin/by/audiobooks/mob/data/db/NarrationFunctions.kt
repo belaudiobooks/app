@@ -90,11 +90,7 @@ private fun AudiobooksByDB.transformNarrationsFlowToNarrationsWithDetailsFlow(in
     }
 }
 
-private fun AudiobooksByDB.transformNarrationToNarrationsWithDetails(narration: Narration): Flow<NarrationDetails> = flow {
-    val narrators = narration.narratorUuids.asFlow().flatMapMerge { getPersonByUuid(it) }.toList()
-    val publishers = narration.publisherUuids.asFlow().flatMapMerge { getPublishersByUuid(it) }.toList()
-    val translators = narration.translatorUuids.asFlow().flatMapMerge { getPersonByUuid(it) }.toList()
-    val linkDetails = getLinkDetailsByNarrationUuid(narrationUuid = narration.uuid).first()
+private suspend fun AudiobooksByDB.transformNarrationToNarrationsWithDetails(narration: Narration): Flow<NarrationDetails> = flow {
     val narrationWithDetails = NarrationDetails(
         uuid = narration.uuid,
         bookUuid = narration.bookUuid,
@@ -106,10 +102,10 @@ private fun AudiobooksByDB.transformNarrationToNarrationsWithDetails(narration: 
         date = narration.date,
         description = narration.description,
         previewUrl = narration.previewUrl,
-        links = linkDetails,
-        narrators = narrators,
-        publishers = publishers,
-        translators = translators
+        links = getLinkDetailsByNarrationUuid(narrationUuid = narration.uuid),
+        narrators = narration.narratorUuids.mapNotNull { getPersonByUuid(it) }.toList(),
+        publishers = narration.publisherUuids.mapNotNull { getPublishersByUuid(it) }.toList(),
+        translators = narration.translatorUuids.mapNotNull { getPersonByUuid(it) }.toList()
     )
     emit(narrationWithDetails)
 }
