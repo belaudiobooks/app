@@ -32,7 +32,7 @@ class HomeViewModel: ViewModel {
   var statePublisher: AnyPublisher<State, Never> { $state.eraseToAnyPublisher() }
   
   private weak var services: Services?
-  
+    
   required init(arguments: HomeArguments, services: Services) {
     self.services = services
     state = State(
