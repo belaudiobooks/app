@@ -17,30 +17,41 @@ class HomeComponent: Component<HomeArguments, Void, HomeViewModel, HomeView> {}
 
 // MARK: MVVM
 
-struct HomeViewState {
-  let newCategory: [BookCover]
-  let curatedCategories: [Category]
-}
+class HomeViewModel: ViewModel {  
+  struct State {
+    let newCategory: [BookCover]
+    let curatedCategories: [Category]
+  }
 
-enum HomeViewAction {
-  case selctedBookCover(id: String)
-  case selectedCategory(sectionIndex: Int)
-}
-
-class HomeViewModel: ViewModel {
-  @Published var state: HomeViewState
-  var statePublisher: AnyPublisher<HomeViewState, Never> { $state.eraseToAnyPublisher() }
-  
-  required init(arguments: HomeArguments) {
-    state = HomeViewState(newCategory: [], curatedCategories: [])
+  enum Action {
+    case selctedBookCover(id: String)
+    case selectedCategory(sectionIndex: Int)
   }
   
-  func handle(action: HomeViewAction) {
+  @Published var state: State
+  var statePublisher: AnyPublisher<State, Never> { $state.eraseToAnyPublisher() }
+  
+  private weak var services: Services?
+  
+  required init(arguments: HomeArguments, services: Services) {
+    self.services = services
+    state = State(
+      newCategory: [testBooks[0], testBooks[1], testBooks[2], testBooks[3]],
+      curatedCategories: [
+        Category(name: "Category one", books: [testBooks[0], testBooks[1], testBooks[2], testBooks[3]]),
+        Category(name: "Category two", books: [testBooks[0], testBooks[1], testBooks[2]]),
+      ])
+  }
+  
+  func handle(action: Action) {
     switch action {
     case .selctedBookCover(let id):
-      // TODO: Fetch book by id
-      guard let book = testBooks.first(where: { $0.id == id }) else { return }
-      // TODO: Navigate
+      guard let services else { return }
+      let bookDetailsComponent = BookDetailsComponent(
+        arguments: BookDetailsArguments(bookID: id),
+        services: services,
+        delegate: nil)
+      services.router.homePath.append(bookDetailsComponent)
     case .selectedCategory(let sectionIndex):
       print("selected category at \(sectionIndex)")
     }

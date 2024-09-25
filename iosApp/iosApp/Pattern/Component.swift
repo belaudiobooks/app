@@ -30,17 +30,25 @@ protocol ComponentView: View {
   init(store: Store<State, Action>)
 }
 
-class Component<Arguments, Delegate, VModel: ViewModel, Content: ComponentView> 
-  where VModel.Arguments == Arguments, VModel.State == Content.State, VModel.Action == Content.Action {
-
+class Component<Arguments, Delegate, VModel: ViewModel, Content: ComponentView>: Hashable
+where VModel.Arguments == Arguments, VModel.State == Content.State, VModel.Action == Content.Action {
+  private let id = UUID()
   private let viewModel: VModel
   private let store: Store<Content.State, Content.Action>
   private(set) var view: Content
+  
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
+  }
+  
+  static func == (lhs: Component<Arguments, Delegate, VModel, Content>, rhs: Component<Arguments, Delegate, VModel, Content>) -> Bool {
+    lhs.id == rhs.id
+  }
 
   private var cancellable = Set<AnyCancellable>()
 
-  init(arguments: Arguments, delegate: Delegate?) {
-    let viewModel = VModel(arguments: arguments)
+  init(arguments: Arguments, services: Services, delegate: Delegate?) {
+    let viewModel = VModel(arguments: arguments, services: services)
     self.viewModel = viewModel
     let store = Store(
       initialState: viewModel.state,

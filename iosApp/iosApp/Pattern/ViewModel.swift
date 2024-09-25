@@ -17,7 +17,7 @@ protocol ViewModel: ObservableObject {
   var state: State { get set }
   var statePublisher: AnyPublisher<State, Never> { get }
   
-  init(arguments: Arguments)
+  init(arguments: Arguments,  services: Services)
   
   func handle(action: Action) -> Void
 }

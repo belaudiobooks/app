@@ -20,6 +20,6 @@ struct CategoryView<Content: View>: View {
     VStack(alignment: .leading) {
       Text(title)
       content()
-    }.border(Color.black)
+    }
   }
 }

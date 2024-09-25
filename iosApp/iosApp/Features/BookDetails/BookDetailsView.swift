@@ -6,9 +6,12 @@
 //  Copyright © 2024 orgName. All rights reserved.
 //
 
-struct BookDetailsView: View {
-  let store: StoreOf<BookDetailsFeature>
+import SwiftUI
+
+struct BookDetailsView: ComponentView {
+  @ObservedObject var store: Store<BookDetailsViewModel.State, BookDetailsViewModel.Action>
+  
     var body: some View {
-        Text("Hello, World!")
+      Text(store.state.book.title)
     }
 }
