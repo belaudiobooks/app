@@ -16,3 +16,12 @@ internal fun AudiobooksByDB.getAllTags(context: CoroutineContext = Dispatchers.I
             description = tagDescription,
             bookCount = bookCount
     )}.asFlow().mapToList(context)
+
+internal fun AudiobooksByDB.getTagsByBookUuid(bookUuid: String, context: CoroutineContext = Dispatchers.IO): Flow<List<Tag>> =
+    tagQueries.selectTagsByBookUuid(bookUuid) { tagId, tagName, tagDescription, bookCount ->
+        Tag(
+            id = tagId,
+            name = tagName,
+            description = tagDescription,
+            bookCount = bookCount
+        )}.asFlow().mapToList(context)

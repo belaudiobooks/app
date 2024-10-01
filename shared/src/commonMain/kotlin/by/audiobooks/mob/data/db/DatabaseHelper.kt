@@ -4,6 +4,7 @@ import app.cash.sqldelight.db.SqlDriver
 import by.audiobooks.mob.data.network.dto.BackendDataSnapshot
 import by.audiobooks.mob.domain.Book
 import by.audiobooks.mob.domain.BookCover
+import by.audiobooks.mob.domain.BookDetails
 import by.audiobooks.mob.domain.Link
 import by.audiobooks.mob.domain.LinkType
 import by.audiobooks.mob.domain.Narration
@@ -13,6 +14,7 @@ import by.audiobooks.mob.domain.Tag
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.withContext
 
 class DatabaseHelper(sqlDriver: SqlDriver) {
@@ -27,6 +29,24 @@ class DatabaseHelper(sqlDriver: SqlDriver) {
 
     fun getNLatestNarrationsAsBookCovers(numberOfBookCovers: Long): Flow<List<BookCover>> =
         database.getNLatestNarrationAsBookCovers(numberOfBookCovers)
+
+    fun getBookDetails(bookUuid: String): Flow<BookDetails> =
+        combine(
+            database.getBookByUuid(bookUuid),
+            database.getNarrationsWithDetailsByBookUuid(bookUuid),
+            database.getAuthorsByBookUuid(bookUuid),
+            database.getTagsByBookUuid(bookUuid)
+        ) { bookInfo, narrations, authors, tags ->
+            BookDetails(
+                uuid = bookInfo.bookUuid,
+                title = bookInfo.bookTitle,
+                description = bookInfo.bookDescription,
+                descriptionSource = bookInfo.bookDescriptionSource,
+                narrations = narrations,
+                authors = authors,
+                tags = tags
+            )
+        }
 
     fun getAllNarrations(): Flow<List<Narration>> = database.getAllNarrations()
 

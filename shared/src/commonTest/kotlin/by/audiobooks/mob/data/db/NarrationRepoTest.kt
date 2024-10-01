@@ -10,6 +10,7 @@ import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class NarrationRepoTest {
 
@@ -42,5 +43,28 @@ class NarrationRepoTest {
         dbHelper.database.insertBook(DBTestData.extraBook)
         runCurrent()
         assertEquals(4, state.value.size)
+    }
+
+    @Test
+    fun getNarrationsWithDetailsByBookUuidTest() = runTest {
+        val unconfinedTestDispatcher = UnconfinedTestDispatcher()
+        val state = dbHelper.database.getNarrationsWithDetailsByBookUuid("977e535e-1e2a-4c95-bf3b-629ff80aee94",
+            unconfinedTestDispatcher).stateIn(backgroundScope)
+        backgroundScope.launch(unconfinedTestDispatcher) { state.collect() }
+
+        // Verify DB is empty
+        assertEquals(0, state.value.size)
+
+        // Insert data snapshot & verify result got updated.
+        dbHelper.database.replaceData(DBTestData.testDataSnapshot)
+        runCurrent()
+        assertEquals(1, state.value.size)
+        assertTrue {
+            val testNarration = state.value.first()
+            testNarration.uuid == "5942b109-714a-477c-8266-d776c7f2fbd7" &&
+                    testNarration.narrators.isNotEmpty() &&
+                    testNarration.publishers.isNotEmpty() &&
+                    testNarration.translators.isEmpty()
+        }
     }
 }

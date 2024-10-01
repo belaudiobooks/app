@@ -42,3 +42,10 @@ JOIN (SELECT T_Tag.id AS tagId, coalesce(count(JT_Book_Tag.book_uuid), 0) AS boo
         FROM T_Tag
         LEFT JOIN JT_Book_Tag ON T_Tag.id = JT_Book_Tag.tag_id
         GROUP BY T_Tag.id) AS BK ON BK.tagId = T_Tag.id;
+
+selectBookByUuid:
+SELECT T_Book.uuid AS bookUuid,
+	   T_Book.title AS bookTitle,
+	   T_Book.description AS bookDescription,
+	   T_Book.description_source AS bookDescriptionSource
+  FROM T_Book WHERE T_Book.uuid = :bookUuid;

@@ -4,6 +4,7 @@ import by.audiobooks.mob.data.db.DatabaseHelper
 import by.audiobooks.mob.data.network.SiteApi
 import by.audiobooks.mob.domain.Book
 import by.audiobooks.mob.domain.BookCover
+import by.audiobooks.mob.domain.BookDetails
 import by.audiobooks.mob.domain.Link
 import by.audiobooks.mob.domain.LinkType
 import by.audiobooks.mob.domain.Narration
@@ -28,6 +29,8 @@ class RepositoryImpl(
 
     override fun getNLatestNarrationsAsBookCovers(numberOfBookCovers: Long): Flow<List<BookCover>> =
         dbHelper.getNLatestNarrationsAsBookCovers(numberOfBookCovers)
+
+    override fun getBookDetails(bookUuid: String): Flow<BookDetails>  = dbHelper.getBookDetails(bookUuid)
 
     override fun getAllNarrations(): Flow<List<Narration>> = dbHelper.getAllNarrations()
 
