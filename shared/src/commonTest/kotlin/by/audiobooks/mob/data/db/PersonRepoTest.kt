@@ -46,15 +46,14 @@ class PersonRepoTest {
 
     @Test
     fun getPersonByUuidTest() = runTest {
-        // Prepare initial data:
+        // Insert test data:
         dbHelper.database.insertPerson(DBTestData.extraPerson)
 
-        // Subscribe to updates:
-        val state = dbHelper.database.getPersonByUuid(DBTestData.extraPerson.uuid, UnconfinedTestDispatcher()).stateIn(backgroundScope)
-        backgroundScope.launch(UnconfinedTestDispatcher()) { state.collect() }
+        // Query record from db:
+        val testPerson = dbHelper.database.getPersonByUuid(DBTestData.extraPerson.uuid)
 
         // Make sure subscription returned expected initial data
-        assertEquals(DBTestData.extraPerson.name, state.value.name)
+        assertEquals(DBTestData.extraPerson.name, testPerson?.name)
 
         // Replace initial entry:
         dbHelper.database.transaction {
@@ -62,9 +61,10 @@ class PersonRepoTest {
             dbHelper.database.insertPerson(DBTestData.extraPerson.copy(name = "Updated-Name"))
         }
 
-        runCurrent()
+        val testUpdatedPerson = dbHelper.database.getPersonByUuid(DBTestData.extraPerson.uuid)
+
         // Check that subscription returned updated entry
-        assertEquals("Updated-Name", state.value.name)
+        assertEquals("Updated-Name", testUpdatedPerson?.name)
     }
 
     @Test

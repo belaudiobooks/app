@@ -9,7 +9,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
@@ -102,9 +101,9 @@ private suspend fun AudiobooksByDB.transformNarrationToNarrationsWithDetails(nar
         date = narration.date,
         description = narration.description,
         previewUrl = narration.previewUrl,
-        links = getLinkDetailsByNarrationUuid(narrationUuid = narration.uuid),
+        links = getLinksDetailsByNarrationUuid(narrationUuid = narration.uuid),
         narrators = narration.narratorUuids.mapNotNull { getPersonByUuid(it) }.toList(),
-        publishers = narration.publisherUuids.mapNotNull { getPublishersByUuid(it) }.toList(),
+        publishers = narration.publisherUuids.mapNotNull { getPublisherByUuid(it) }.toList(),
         translators = narration.translatorUuids.mapNotNull { getPersonByUuid(it) }.toList()
     )
     emit(narrationWithDetails)

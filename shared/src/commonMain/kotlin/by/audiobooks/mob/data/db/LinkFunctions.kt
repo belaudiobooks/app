@@ -17,30 +17,7 @@ internal fun AudiobooksByDB.getAllLinks(context: CoroutineContext = Dispatchers.
         linkTypeId = linkTypeId
     ) }.asFlow().mapToList(context)
 
-internal fun AudiobooksByDB.getLinkDetailsByNarrationUuid(
-    narrationUuid: String,
-    context: CoroutineContext = Dispatchers.IO
-): Flow<List<LinkDetails>> =
-    linkQueries.selectLinkDetailsByNarrationUuid(narrationUuid) {
-    narrationUuid,
-    narrationLink,
-    linkTypeId,
-    linkTypeName,
-    linkTypeIcon,
-    linkTypeCaption,
-    linkTypeAvailability ->
-        LinkDetails(
-            narrationUuid = narrationUuid,
-            url = narrationLink,
-            linkTypeId = linkTypeId,
-            linkTypeName = linkTypeName,
-            linkTypeIcon = linkTypeIcon,
-            linkTypeCaption = linkTypeCaption,
-            linkTypeAvailability = Availability.valueOf(linkTypeAvailability)
-        )
-    }.asFlow().mapToList(context)
-
-internal fun AudiobooksByDB.getLinkDetailsByNarrationUuid(narrationUuid: String): List<LinkDetails> =
+internal fun AudiobooksByDB.getLinksDetailsByNarrationUuid(narrationUuid: String): List<LinkDetails> =
     linkQueries.selectLinkDetailsByNarrationUuid(narrationUuid) {
             narrationUuid,
             narrationLink,
