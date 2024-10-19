@@ -7,3 +7,14 @@ SELECT T_Tag.id AS tagId,
     FROM T_Tag
     LEFT JOIN JT_Book_Tag ON T_Tag.id = JT_Book_Tag.tag_id
     GROUP BY T_Tag.id;
+
+selectTagsByBookUuid:
+SELECT T_Tag.id AS tagId,
+       T_Tag.name AS tagName,
+       T_Tag.description AS tagDescription,
+       coalesce(count(JT_Book_Tag.book_uuid), 0) AS bookCount
+    FROM T_Tag JOIN JT_Book_Tag ON T_Tag.id = JT_Book_Tag.tag_id
+	WHERE T_Tag.id IN
+	        ( SELECT JT_Book_Tag.tag_id FROM JT_Book_Tag
+	        WHERE JT_Book_Tag.book_uuid = :bookUuid )
+    GROUP BY T_Tag.id;

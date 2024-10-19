@@ -2,6 +2,7 @@ package by.audiobooks.mob.data.db
 
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
+import app.cash.sqldelight.coroutines.mapToOne
 import by.audiobooks.mob.domain.Book
 import by.audiobooks.mob.domain.BookCover
 import by.audiobooks.mob.domain.Gender
@@ -67,3 +68,6 @@ internal fun AudiobooksByDB.getNLatestNarrationAsBookCovers(numberOfBookCovers: 
                 )}.first()
             }.sortedBy { it.date }.reversed()
         }
+
+internal fun AudiobooksByDB.getBookByUuid(bookUuid: String, context: CoroutineContext = Dispatchers.IO): Flow<SelectBookByUuid> =
+    bookQueries.selectBookByUuid(bookUuid).asFlow().mapToOne(context)

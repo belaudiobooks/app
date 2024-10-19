@@ -43,4 +43,16 @@ class LinkRepoTest {
         runCurrent()
         assertEquals(10, state.value.size)
     }
+
+    @Test
+    fun getLinkDetailsByNarrationUuidTest() {
+        // Insertion entire test data snapshot since LinkType records are required for query
+        dbHelper.database.replaceData(DBTestData.testDataSnapshot)
+        // Test based on extraBook record
+        dbHelper.database.insertBook(DBTestData.extraBook)
+
+        val listOfLinkDetails = dbHelper.database.getLinksDetailsByNarrationUuid(DBTestData.extraBook.narrations.first().uuid)
+
+        assertEquals(3, listOfLinkDetails.size)
+    }
 }

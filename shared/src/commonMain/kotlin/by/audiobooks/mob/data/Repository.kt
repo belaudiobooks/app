@@ -2,6 +2,7 @@ package by.audiobooks.mob.data
 
 import by.audiobooks.mob.domain.Book
 import by.audiobooks.mob.domain.BookCover
+import by.audiobooks.mob.domain.BookDetails
 import by.audiobooks.mob.domain.Link
 import by.audiobooks.mob.domain.LinkType
 import by.audiobooks.mob.domain.Narration
@@ -27,6 +28,11 @@ interface Repository {
      * Flow of N most recently added narrations represented by [BookCover] records.
      */
     fun getNLatestNarrationsAsBookCovers(numberOfBookCovers: Long = 10): Flow<List<BookCover>>
+
+    /**
+     * Get subscription to actual state of [BookDetails] by uuid of book.
+     */
+    fun getBookDetails(bookUuid: String): Flow<BookDetails>
 
     /**
      * Flow of all [Narration] records from database. It emits a new list every
