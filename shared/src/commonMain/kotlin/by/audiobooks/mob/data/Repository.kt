@@ -19,12 +19,6 @@ interface Repository {
     suspend fun refreshData()
 
     /**
-     * Flow of all [Book] records from database. It emits a new list every
-     * time the database changes for underlying query.
-     */
-    fun getAllBooks(): Flow<List<Book>>
-
-    /**
      * Flow of N most recently added narrations represented by [BookCover] records.
      */
     fun getNLatestNarrationsAsBookCovers(numberOfBookCovers: Long = 10): Flow<List<BookCover>>
@@ -33,6 +27,28 @@ interface Repository {
      * Get subscription to actual state of [BookDetails] by uuid of book.
      */
     fun getBookDetails(bookUuid: String): Flow<BookDetails>
+
+    /**
+     * Flow of all [Tag] records from database. It emits a new list every
+     * time the database changes for underlying query.
+     */
+    fun getAllTags(): Flow<List<Tag>>
+
+    /**
+     * Subscription to single [Tag] updates.
+     */
+    fun getTagById(tagId: Long): Flow<Tag>
+
+    /**
+     * Get subscription to list of [BookDetails] by tag id.
+     */
+    fun getBooksDetailsByTagId(id: Long): Flow<List<BookDetails>>
+
+    /**
+     * Flow of all [Book] records from database. It emits a new list every
+     * time the database changes for underlying query.
+     */
+    fun getAllBooks(): Flow<List<Book>>
 
     /**
      * Flow of all [Narration] records from database. It emits a new list every
@@ -53,12 +69,6 @@ interface Repository {
     fun getAllPublishers(): Flow<List<Publisher>>
 
     /**
-     * Flow of all [Tag] records from database. It emits a new list every
-     * time the database changes for underlying query.
-     */
-    fun getAllTags(): Flow<List<Tag>>
-
-    /**
      * Flow of all [Link] records from database. It emits a new list every
      * time the database changes for underlying query.
      */
@@ -69,5 +79,4 @@ interface Repository {
      * time the database changes for underlying query.
      */
     fun getAllLinkTypes(): Flow<List<LinkType>>
-
 }

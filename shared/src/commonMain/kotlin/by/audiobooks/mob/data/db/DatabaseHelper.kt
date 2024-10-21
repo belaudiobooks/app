@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class DatabaseHelper(sqlDriver: SqlDriver) {
@@ -33,9 +34,9 @@ class DatabaseHelper(sqlDriver: SqlDriver) {
     fun getBookDetails(bookUuid: String): Flow<BookDetails> =
         combine(
             database.getBookByUuid(bookUuid),
-            database.getNarrationsWithDetailsByBookUuid(bookUuid),
-            database.getAuthorsByBookUuid(bookUuid),
-            database.getTagsByBookUuid(bookUuid)
+            database.getNarrationsWithDetailsByBookUuidSubscription(bookUuid),
+            database.getAuthorsByBookUuidSubscription(bookUuid),
+            database.getTagsByBookUuidSubscription(bookUuid)
         ) { bookInfo, narrations, authors, tags ->
             BookDetails(
                 uuid = bookInfo.bookUuid,
@@ -46,6 +47,21 @@ class DatabaseHelper(sqlDriver: SqlDriver) {
                 authors = authors,
                 tags = tags
             )
+        }
+
+    fun getBooksDetailsByTagId(tagId: Long): Flow<List<BookDetails>> =
+        database.getBooksByTagId(tagId).map {
+            it.map { book ->
+                BookDetails(
+                    uuid = book.bookUuid,
+                    title = book.bookTitle,
+                    description = book.bookDescription,
+                    descriptionSource = book.bookDescriptionSource,
+                    narrations = database.getNarrationsWithDetailsByBookUuid(book.bookUuid),
+                    authors = database.getAuthorsByBookUuid(book.bookUuid),
+                    tags = database.getTagsByBookUuid(book.bookUuid)
+                )
+            }
         }
 
     fun getAllNarrations(): Flow<List<Narration>> = database.getAllNarrations()
@@ -59,5 +75,7 @@ class DatabaseHelper(sqlDriver: SqlDriver) {
     fun getAllLinks(): Flow<List<Link>> = database.getAllLinks()
 
     fun getAllLinkTypes(): Flow<List<LinkType>> = database.getAllLinkTypes()
+
+    fun getTagById(tagId: Long): Flow<Tag> = database.getTagById(tagId)
 
 }

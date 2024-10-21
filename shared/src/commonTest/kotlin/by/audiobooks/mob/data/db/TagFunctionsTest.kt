@@ -51,12 +51,12 @@ class TagFunctionsTest {
     }
 
     @Test
-    fun getTagsByBookUuidTest() = runTest {
+    fun getTagsByBookUuidSubscriptionTest() = runTest {
         // It is important to inject UnconfinedTestDispatcher() (implementation of TestDispatcher)
         // to the query execution logic to let it schedule DB internal tasks for the proper functioning
         // flow of result sets (updating StateFlow).
         // See https://developer.android.com/kotlin/coroutines/test#invoking-suspending-functions
-        val state = dbHelper.database.getTagsByBookUuid("977e535e-1e2a-4c95-bf3b-629ff80aee94", UnconfinedTestDispatcher()).stateIn(backgroundScope)
+        val state = dbHelper.database.getTagsByBookUuidSubscription("977e535e-1e2a-4c95-bf3b-629ff80aee94", UnconfinedTestDispatcher()).stateIn(backgroundScope)
         backgroundScope.launch(UnconfinedTestDispatcher()) { state.collect() }
 
         // Verify DB is empty
@@ -71,5 +71,38 @@ class TagFunctionsTest {
             // check these tags are 0 and 2
             state.value.filter { it.id == 0L || it.id ==2L }.size == 2
         }
+    }
+
+    @Test
+    fun getTagsByBookUuidTest() = runTest {
+        // Insert test data
+        dbHelper.database.replaceData(DBTestData.testDataSnapshot)
+        runCurrent()
+
+        // Get data from DB
+        val tags = dbHelper.database.getTagsByBookUuid("977e535e-1e2a-4c95-bf3b-629ff80aee94")
+
+        // check that list contains exactly two tags
+        assertEquals(2, tags.size)
+        assertTrue {
+            // check these tags are 0 and 2
+            tags.filter { it.id == 0L || it.id ==2L }.size == 2
+        }
+    }
+
+    @Test
+    fun getTagByIdTest() = runTest {
+        // Insert test data
+        dbHelper.database.replaceData(DBTestData.testDataSnapshot)
+        runCurrent()
+
+        // Subscribe
+        val tagState = dbHelper.database.getTagById(2L, UnconfinedTestDispatcher()).stateIn(backgroundScope)
+        backgroundScope.launch(UnconfinedTestDispatcher()) { tagState.collect() }
+
+        // check that list contains exactly two tags
+        assertEquals(2L, tagState.value.id)
+        assertEquals("Дзецям і падлеткам", tagState.value.name)
+        assertEquals(2L, tagState.value.bookCount)
     }
 }

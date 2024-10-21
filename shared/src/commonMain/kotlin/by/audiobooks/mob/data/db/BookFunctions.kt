@@ -71,3 +71,6 @@ internal fun AudiobooksByDB.getNLatestNarrationAsBookCovers(numberOfBookCovers: 
 
 internal fun AudiobooksByDB.getBookByUuid(bookUuid: String, context: CoroutineContext = Dispatchers.IO): Flow<SelectBookByUuid> =
     bookQueries.selectBookByUuid(bookUuid).asFlow().mapToOne(context)
+
+internal fun AudiobooksByDB.getBooksByTagId(tagId: Long, context: CoroutineContext = Dispatchers.IO): Flow<List<SelectBooksByTagId>> =
+    bookQueries.selectBooksByTagId(tagId).asFlow().mapToList(context)

@@ -9,6 +9,7 @@ import kotlinx.coroutines.test.runTest
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
@@ -92,6 +93,24 @@ class BookRepoTest {
     }
 
     @Test
+    fun getBooksByTagIdTest() = runTest {
+        // Subscribe
+        val state = dbHelper.database.getBooksByTagId(2L, UnconfinedTestDispatcher())
+            .stateIn(backgroundScope)
+        backgroundScope.launch(UnconfinedTestDispatcher()) { state.collect() }
+
+        // Make sure database is empty
+        assertEquals(0, state.value.size)
+
+        // Insert test data
+        dbHelper.database.replaceData(DBTestData.testDataSnapshot)
+        runCurrent()
+
+        // Make sure we have two books in the result set
+        assertEquals(2, state.value.size)
+    }
+
+    @Test
     fun getBookDetailsTest() = runTest {
         // Insert test data:
         dbHelper.database.replaceData(DBTestData.testDataSnapshot)
@@ -106,5 +125,29 @@ class BookRepoTest {
         assertEquals("Першая Кніга", state.value.title)
         assertEquals(1, state.value.narrations.size)
         assertEquals(2, state.value.tags.size)
+    }
+
+    @Test
+    fun getBooksDetailsByTagIdTest() = runTest {
+        // Insert test data:
+        dbHelper.database.replaceData(DBTestData.testDataSnapshot)
+
+        // Subscribe
+        val booksDetails = dbHelper.getBooksDetailsByTagId(2L)
+            .stateIn(backgroundScope)
+        backgroundScope.launch { booksDetails.collect() }
+        runCurrent()
+
+        // Verify
+        assertNotNull(booksDetails)
+        assertEquals(booksDetails.value.size, 2)
+        assertEquals(booksDetails.value.map { it.uuid }
+            .containsAll(
+                listOf(
+                    "5cf6f8bd-796c-43f8-9b32-8cd3dd58ab70",
+                    "977e535e-1e2a-4c95-bf3b-629ff80aee94"
+                )
+            ),
+            true)
     }
 }
