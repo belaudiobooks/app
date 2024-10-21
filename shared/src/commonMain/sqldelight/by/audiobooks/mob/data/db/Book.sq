@@ -49,3 +49,11 @@ SELECT T_Book.uuid AS bookUuid,
 	   T_Book.description AS bookDescription,
 	   T_Book.description_source AS bookDescriptionSource
   FROM T_Book WHERE T_Book.uuid = :bookUuid;
+
+selectBooksByTagId:
+SELECT T_Book.uuid AS bookUuid,
+	   T_Book.title AS bookTitle,
+	   T_Book.description AS bookDescription,
+	   T_Book.description_source AS bookDescriptionSource
+  FROM T_Book JOIN JT_Book_Tag ON T_Book.uuid = JT_Book_Tag.book_uuid
+    WHERE JT_Book_Tag.tag_id = :tagId;

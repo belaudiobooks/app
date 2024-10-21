@@ -46,9 +46,9 @@ class NarrationRepoTest {
     }
 
     @Test
-    fun getNarrationsWithDetailsByBookUuidTest() = runTest {
+    fun getNarrationsWithDetailsByBookUuidSubscriptionTest() = runTest {
         val unconfinedTestDispatcher = UnconfinedTestDispatcher()
-        val state = dbHelper.database.getNarrationsWithDetailsByBookUuid("977e535e-1e2a-4c95-bf3b-629ff80aee94",
+        val state = dbHelper.database.getNarrationsWithDetailsByBookUuidSubscription("977e535e-1e2a-4c95-bf3b-629ff80aee94",
             unconfinedTestDispatcher).stateIn(backgroundScope)
         backgroundScope.launch(unconfinedTestDispatcher) { state.collect() }
 
@@ -61,6 +61,26 @@ class NarrationRepoTest {
         assertEquals(1, state.value.size)
         assertTrue {
             val testNarration = state.value.first()
+            testNarration.uuid == "5942b109-714a-477c-8266-d776c7f2fbd7" &&
+                    testNarration.narrators.isNotEmpty() &&
+                    testNarration.publishers.isNotEmpty() &&
+                    testNarration.translators.isEmpty()
+        }
+    }
+
+    @Test
+    fun getNarrationsWithDetailsByBookUuidTest() = runTest {
+        // Insert data snapshot & verify result got updated.
+        dbHelper.database.replaceData(DBTestData.testDataSnapshot)
+        runCurrent()
+
+        // Get data from database
+        val narrationsWithDetails = dbHelper.database.getNarrationsWithDetailsByBookUuid("977e535e-1e2a-4c95-bf3b-629ff80aee94")
+
+        // Verify
+        assertEquals(1, narrationsWithDetails.size)
+        assertTrue {
+            val testNarration = narrationsWithDetails.first()
             testNarration.uuid == "5942b109-714a-477c-8266-d776c7f2fbd7" &&
                     testNarration.narrators.isNotEmpty() &&
                     testNarration.publishers.isNotEmpty() &&

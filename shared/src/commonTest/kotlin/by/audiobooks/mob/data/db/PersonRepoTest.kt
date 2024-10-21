@@ -68,8 +68,8 @@ class PersonRepoTest {
     }
 
     @Test
-    fun getAuthorsByBookUuidTest() = runTest {
-        val state = dbHelper.database.getAuthorsByBookUuid("977e535e-1e2a-4c95-bf3b-629ff80aee94", UnconfinedTestDispatcher()).stateIn(backgroundScope)
+    fun getAuthorsByBookUuidSubscriptionTest() = runTest {
+        val state = dbHelper.database.getAuthorsByBookUuidSubscription("977e535e-1e2a-4c95-bf3b-629ff80aee94", UnconfinedTestDispatcher()).stateIn(backgroundScope)
         backgroundScope.launch(UnconfinedTestDispatcher()) { state.collect() }
 
         // Verify DB is empty
@@ -80,5 +80,17 @@ class PersonRepoTest {
         runCurrent()
         assertEquals(1, state.value.size)
         assertEquals("e50f35f5-c134-4c82-90cc-8391fd676f3d", state.value.first().uuid)
+    }
+
+    @Test
+    fun getAuthorsByBookUuidTest() = runTest {
+        // Insert data snapshot
+        dbHelper.database.replaceData(DBTestData.testDataSnapshot)
+        runCurrent()
+
+        val authors = dbHelper.database.getAuthorsByBookUuid("977e535e-1e2a-4c95-bf3b-629ff80aee94")
+
+        assertEquals(1, authors.size)
+        assertEquals("e50f35f5-c134-4c82-90cc-8391fd676f3d", authors.first().uuid)
     }
 }

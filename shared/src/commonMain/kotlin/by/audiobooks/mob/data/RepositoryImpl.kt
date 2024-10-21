@@ -32,6 +32,8 @@ class RepositoryImpl(
 
     override fun getBookDetails(bookUuid: String): Flow<BookDetails>  = dbHelper.getBookDetails(bookUuid)
 
+    override fun getBooksDetailsByTagId(id: Long): Flow<List<BookDetails>> = dbHelper.getBooksDetailsByTagId(id)
+
     override fun getAllNarrations(): Flow<List<Narration>> = dbHelper.getAllNarrations()
 
     override fun getAllPersons(): Flow<List<Person>> = dbHelper.getAllPersons()
@@ -39,6 +41,8 @@ class RepositoryImpl(
     override fun getAllPublishers(): Flow<List<Publisher>> = dbHelper.getAllPublishers()
 
     override fun getAllTags(): Flow<List<Tag>> = dbHelper.getAllTags()
+
+    override fun getTagById(tagId: Long): Flow<Tag> = dbHelper.getTagById(tagId)
 
     override fun getAllLinks(): Flow<List<Link>> = dbHelper.getAllLinks()
 
