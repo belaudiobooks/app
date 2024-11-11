@@ -56,4 +56,13 @@ class HomeViewModel: ViewModel {
       print("selected category at \(sectionIndex)")
     }
   }
+  
+  @MainActor
+  private func setObservations() async {
+    guard let services else { return }
+
+    for await bookCovers in services.repositoryClient.repository.getNLatestNarrationsAsBookCovers(numberOfBookCovers: 8) {
+      //state.
+    }
+  }
 }

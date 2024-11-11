@@ -5,11 +5,13 @@ struct iOSApp: App {
   @ObservedObject private var router: Router
   private let services: Services
   private let homeComponent: HomeComponent
+  private let repositoryClient: RepositoryClient
       
   init() {
     let router = Router(selectedTab: 0)
     self.router = router
-    services = Services(router: router)
+    self.repositoryClient = RepositoryClient()
+    services = Services(router: router, repositoryClient: repositoryClient)
     homeComponent = HomeComponent(arguments: HomeArguments(), services: services, delegate: nil)
   }
   
