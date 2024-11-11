@@ -18,3 +18,14 @@ internal fun AudiobooksByDB.getAllPublishers(context: CoroutineContext = Dispatc
                 description = publisherDescription
             )
         }.asFlow().mapToList(context)
+
+internal fun AudiobooksByDB.getPublisherByUuid(publisherUuid: String): Publisher? =
+    publisherQueries.selectPublisherByUuid(publisherUuid) { publisherUuid, publisherName, publisherUrl, publisherLogo, publisherDescription ->
+        Publisher(
+            uuid = publisherUuid,
+            name = publisherName,
+            url = publisherUrl,
+            logo = publisherLogo,
+            description = publisherDescription
+        )
+    }.executeAsOneOrNull()
