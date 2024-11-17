@@ -1,7 +1,9 @@
 package by.audiobooks.mob.data.db
 
+import app.cash.sqldelight.Query
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
+import app.cash.sqldelight.coroutines.mapToOne
 import by.audiobooks.mob.domain.Gender
 import by.audiobooks.mob.domain.Person
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +26,13 @@ internal fun AudiobooksByDB.getAllPersons(context: CoroutineContext = Dispatcher
     }.asFlow().mapToList(context)
 
 internal fun AudiobooksByDB.getPersonByUuid(personUuid: String): Person? =
-    personQueries.selectPersonByUuid(personUuid) { personUuid, personName, personDescription, personDescriptionSource, personPhoto, personPhotoSource, personGender ->
+    getPersonByUuidQuery(personUuid).executeAsOneOrNull()
+
+internal fun AudiobooksByDB.getPersonByUuidSubscription(personUuid: String, context: CoroutineContext = Dispatchers.IO): Flow<Person> =
+    getPersonByUuidQuery(personUuid).asFlow().mapToOne(context)
+
+private fun AudiobooksByDB.getPersonByUuidQuery(personUuid: String): Query<Person> {
+    return personQueries.selectPersonByUuid(personUuid) { personUuid, personName, personDescription, personDescriptionSource, personPhoto, personPhotoSource, personGender ->
         Person(
             uuid = personUuid,
             name = personName,
@@ -34,7 +42,8 @@ internal fun AudiobooksByDB.getPersonByUuid(personUuid: String): Person? =
             photoSource = personPhotoSource,
             gender = Gender.valueOf(personGender)
         )
-    }.executeAsOneOrNull()
+    }
+}
 
 internal fun AudiobooksByDB.getAuthorsByBookUuidSubscription(bookUuid: String, context: CoroutineContext = Dispatchers.IO): Flow<List<Person>> =
     personQueries.selectAuthorsByBookUuid(bookUuid).asFlow().mapToList(context)

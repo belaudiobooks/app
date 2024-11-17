@@ -66,4 +66,27 @@ class PublisherRepoTest {
         // Check that subscription returned updated entry
         assertEquals("Updated-Name", testUpdatedPublisher?.name)
     }
+
+    @Test
+    fun getPublishersByUuidSubscriptionTest() = runTest {
+        // Insert test data:
+        dbHelper.database.insertPublisher(DBTestData.extraPublisher)
+
+        // Query record from db:
+        val state = dbHelper.database.getPublisherByUuidSubscription(DBTestData.extraPublisher.uuid, UnconfinedTestDispatcher()).stateIn(backgroundScope)
+        backgroundScope.launch(UnconfinedTestDispatcher()) { state.collect() }
+
+        // Make sure subscription returned expected initial data
+        assertEquals(DBTestData.extraPublisher.name, state.value.name)
+
+        // Replace initial entry:
+        dbHelper.database.transaction {
+            dbHelper.database.cleanUpDB()
+            dbHelper.database.insertPublisher(DBTestData.extraPublisher.copy(name = "Updated-Name"))
+        }
+        runCurrent()
+
+        // Check that subscription returned updated entry
+        assertEquals("Updated-Name", state.value.name)
+    }
 }
