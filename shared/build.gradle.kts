@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeSimulatorTest
 import java.io.ByteArrayOutputStream
 
@@ -110,11 +109,5 @@ sqldelight {
         create("AudiobooksByDB") {
             packageName.set("by.audiobooks.mob.data.db")
         }
-    }
-}
-
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        freeCompilerArgs += "-Xexpect-actual-classes"
     }
 }
