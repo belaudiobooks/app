@@ -1,5 +1,5 @@
 [versions]
-agp = "8.3.2" # AGP - Android Gradle Plugin
+agp = "8.5.2" # AGP - Android Gradle Plugin
 android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
@@ -12,18 +12,18 @@ androidx-material = "1.11.0"
 androidx-test-junit = "1.1.5"
 androidx-lifecycle = "2.8.3"
 androidx-work-runtime-ktx = "2.9.0"
-compose = "1.7.0-beta04"
-compose-plugin = "1.6.1"
+compose = "1.7.5"
+compose-multiplatform = "1.7.0"
 junit = "4.13.2"
-kotlin = "1.9.23"
-kotlinx-serialization = "1.6.2"
-kotlinx-datetime = "0.5.0"
-kotlinx-coroutines = "1.7.3"
-ktor = "2.3.8"
+kotlin = "2.0.21"
+kotlinx-serialization = "1.7.3"
+kotlinx-datetime = "0.6.1"
+kotlinx-coroutines = "1.9.0"
+ktor = "3.0.1"
 sqldelight = "2.0.2"
-koin = "3.6.0-wasm-alpha2"
+koin = "4.0.0"
 napier = "2.7.1"
-skie = "0.8.2"
+skie = "0.9.3"
 
 [libraries]
 kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization"}
@@ -70,8 +70,9 @@ koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 skie = { id = "co.touchlab.skie", version.ref = "skie"}

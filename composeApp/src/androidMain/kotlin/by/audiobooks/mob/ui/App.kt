@@ -52,7 +52,6 @@ fun App(homeScreenViewModel: HomeViewModel = koinViewModel()) {
             }
             AnimatedVisibility(showContent) {
                 Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(painterResource(DrawableResource("compose-multiplatform.xml")), null)
                     Text("Compose: $greeting")
                 }
             }
