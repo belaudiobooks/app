@@ -22,7 +22,7 @@ class BookDetailsComponent: Component<BookDetailsArguments, Void, BookDetailsVie
 
 class BookDetailsViewModel: ViewModel {
   struct State: Equatable {
-    let book: BookCover
+    var book: BookDetails?
   }
 
   enum Action {
@@ -31,13 +31,24 @@ class BookDetailsViewModel: ViewModel {
   @Published var state: State
   var statePublisher: AnyPublisher<State, Never> { $state.eraseToAnyPublisher() }
   
-  private weak var services: Services?
+  private let services: Services
+  private let arguments: BookDetailsArguments
   
   required init(arguments: BookDetailsArguments, services: Services) {
     self.services = services
-    state = State(book: testBooks.first(where: {$0.id == arguments.bookID }) ?? testBooks[0])
+    self.arguments = arguments
+    state = State(book: nil)
+    setObservations()
   }
   
   func handle(action: Action) {
+  }
+  
+  private func setObservations() {
+    Task {
+      for await bookDetails in services.repositoryClient.repository.getBookDetails(bookUuid: self.arguments.bookID) {
+        state.book = BookDetails(bookDetails: bookDetails)
+      }
+    }
   }
 }

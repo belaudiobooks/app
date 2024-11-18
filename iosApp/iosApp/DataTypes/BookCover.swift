@@ -13,11 +13,9 @@ struct BookCover: Equatable, Identifiable {
   var id: String { uuid }
   let uuid: String
   let title: String
-  let coverImageURL: String
-  let date: Date?
+  let coverImageURL: [String]
   let description: String
-  let descriptionSource: String
-  let authors: [String]
+  let authors: [Author]
   let tags: [String]
 }
 
@@ -25,13 +23,19 @@ extension BookCover {
   init(bookCover: Shared.BookCover) {
     uuid = bookCover.uuid
     title = bookCover.title
-    coverImageURL = bookCover.coverImage
-    date = bookCover.date.date
-    description = bookCover.description
-    descriptionSource = bookCover.descriptionSource
-    // TODO: Create types
-    authors = bookCover.authors.map { $0.name }
+    coverImageURL = [bookCover.coverImage]
+    description = bookCover.description_
+    authors = bookCover.authors.map { .init(author: $0) }
     tags = bookCover.tags.map { $0.name }
+  }
+  
+  init(bookDetails: BookDetails) {
+    uuid = bookDetails.uuid
+    title = bookDetails.title
+    coverImageURL = bookDetails.narrations.map { $0.coverImageURL }
+    description = bookDetails.description
+    authors = bookDetails.authors
+    tags = bookDetails.tags
   }
 }
 
