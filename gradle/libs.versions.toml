@@ -24,6 +24,7 @@ sqldelight = "2.0.2"
 koin = "4.0.0"
 napier = "2.7.1"
 skie = "0.9.3"
+algolia = "3.10.0"
 
 [libraries]
 kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization"}
@@ -58,6 +59,7 @@ koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", versi
 koin-compose-multiplatform = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "androidx-work-runtime-ktx" }
 napier = { module = "io.github.aakira:napier", version.ref ="napier" }
+algolia-search = { module = "com.algolia:algoliasearch-client-kotlin", version.ref ="algolia" }
 
 # Tests libraries:
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }

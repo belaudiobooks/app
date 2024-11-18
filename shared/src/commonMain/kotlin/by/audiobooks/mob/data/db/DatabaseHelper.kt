@@ -68,7 +68,11 @@ class DatabaseHelper(sqlDriver: SqlDriver) {
 
     fun getAllPersons(): Flow<List<Person>> = database.getAllPersons()
 
+    fun getPersonByUuid(personUuid: String): Flow<Person> = database.getPersonByUuidSubscription(personUuid)
+
     fun getAllPublishers(): Flow<List<Publisher>> = database.getAllPublishers()
+
+    fun getPublisherByUuid(publisherUuid: String): Flow<Publisher> = database.getPublisherByUuidSubscription(publisherUuid)
 
     fun getAllTags(): Flow<List<Tag>> = database.getAllTags()
 

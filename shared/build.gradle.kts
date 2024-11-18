@@ -46,6 +46,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.common)
             implementation(libs.koin.core)
             implementation(libs.napier)
+            implementation(libs.algolia.search)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
