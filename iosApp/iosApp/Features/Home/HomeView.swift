@@ -13,17 +13,19 @@ struct HomeView: ComponentView {
   
   var body: some View {
     NavigationView {
-      List {
-        CategoryView(title: "New") {
-          BookRowView(books: store.state.newCategory) { bookID in
-            store.handle(.selctedBookCover(id: bookID))
-          }
-        }
-        
-        ForEach(store.state.curatedCategories, id: \.id){ category in
-          CategoryView(title: category.name) {
-            BookRowView(books: category.books) { bookID in
+      ScrollView(.vertical) {
+        VStack {
+          CategoryView(title: "New") {
+            BookRowView(books: store.state.newCategory) { bookID in
               store.handle(.selctedBookCover(id: bookID))
+            }
+          }
+          
+          ForEach(store.state.curatedCategories, id: \.id){ category in
+            CategoryView(title: category.name) {
+              BookRowView(books: category.books) { bookID in
+                store.handle(.selctedBookCover(id: bookID))
+              }
             }
           }
         }

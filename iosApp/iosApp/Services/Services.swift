@@ -10,8 +10,10 @@ import Foundation
 
 class Services {
   let router: Router
+  let repositoryClient: RepositoryClient
   
-  init(router: Router) {
+  init(router: Router, repositoryClient: RepositoryClient) {
     self.router = router
+    self.repositoryClient = repositoryClient
   }
 }

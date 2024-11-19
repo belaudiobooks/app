@@ -17,12 +17,13 @@ final class Router: ObservableObject {
   
   init(
     selectedTab: Int,
-    homePath: NavigationPath = NavigationPath()
-  ) {
+    homePath: NavigationPath = NavigationPath(),
+    catalogPath: NavigationPath = NavigationPath(),
+    searchPath: NavigationPath = NavigationPath()) {
     self.selectedTab = selectedTab
     self.homePath = homePath
-    self.catalogPath = homePath
-    self.searchPath = homePath
+    self.catalogPath = catalogPath
+    self.searchPath = searchPath
   }
   
   var objectWillChangeSequence: AsyncPublisher<Publishers.Buffer<ObservableObjectPublisher>> {

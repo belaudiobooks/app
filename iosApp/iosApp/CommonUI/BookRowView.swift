@@ -22,6 +22,6 @@ struct BookRowView: View {
           }
         }
       }
-    }.border(Color.black)
+    }
   }
 }

@@ -14,7 +14,7 @@ struct BookCoverView: View {
   
   var body: some View {
     VStack(alignment: .leading) {
-      StackedBookCoverView(imageURLs: [book.coverImageURL])
+      StackedBookCoverView(imageURLs: book.coverImageURL)
       Text(book.title)
         .font(.caption)
       Text("will be added later")
@@ -34,10 +34,8 @@ struct BookCoverView: View {
     book: BookCover(
       uuid: "1",
       title: "Book One",
-      coverImageURL: "https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg",
-      date: Date(),
+      coverImageURL: ["https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg"],
       description: "Description One",
-      descriptionSource: "Source One",
       authors: [],
       tags: []),
     action: {_ in })

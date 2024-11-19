@@ -11,5 +11,5 @@ import Foundation
 struct Category: Equatable, Identifiable {
   var id: String { name }
   let name: String
-  let books: [BookCover]
+  var books: [BookCover]
 }

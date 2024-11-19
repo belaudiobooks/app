@@ -2,12 +2,12 @@ package by.audiobooks.mob.di
 
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.native.NativeSqliteDriver
+import by.audiobooks.mob.data.Repository
+import by.audiobooks.mob.data.RepositoryImpl
 import by.audiobooks.mob.data.db.AudiobooksByDB
-import kotlinx.cinterop.ObjCClass
-import kotlinx.cinterop.getOriginalKotlinClass
-import org.koin.core.Koin
-import org.koin.core.parameter.parametersOf
-import org.koin.core.qualifier.Qualifier
+import by.audiobooks.mob.data.db.DatabaseHelper
+import by.audiobooks.mob.data.network.AlgoliaSearchApi
+import by.audiobooks.mob.data.network.SiteApi
 import org.koin.dsl.module
 
 
@@ -17,14 +17,15 @@ actual val platformModule = module {
     }
 }
 
-@kotlinx.cinterop.BetaInteropApi
-fun Koin.get(objCClass: ObjCClass): Any {
-    val kClazz = getOriginalKotlinClass(objCClass)!!
-    return get(kClazz, null, null)
-}
-
-@kotlinx.cinterop.BetaInteropApi
-fun Koin.get(objCClass: ObjCClass, qualifier: Qualifier?, parameter: Any): Any {
-    val kClazz = getOriginalKotlinClass(objCClass)!!
-    return get(kClazz, qualifier) { parametersOf(parameter) }
+fun getRepositoryClient(): Repository {
+    return RepositoryImpl(
+        dbHelper = DatabaseHelper(
+            sqlDriver = NativeSqliteDriver(
+                AudiobooksByDB.Schema,
+                "audiobooks-by.db"
+            )
+        ),
+        siteApi = SiteApi(),
+        algoliaSearchApi = AlgoliaSearchApi()
+    )
 }
