@@ -8,6 +8,7 @@ import by.audiobooks.mob.domain.LinkType
 import by.audiobooks.mob.domain.Narration
 import by.audiobooks.mob.domain.Person
 import by.audiobooks.mob.domain.Publisher
+import by.audiobooks.mob.domain.SearchResults
 import by.audiobooks.mob.domain.Tag
 import kotlinx.coroutines.flow.Flow
 
@@ -17,6 +18,11 @@ interface Repository {
      * Asynchronously update db from remote server.
      */
     suspend fun refreshData()
+
+    /**
+     * Get subscription to results of algolia search.
+     */
+    suspend fun search(query: String): Flow<SearchResults>
 
     /**
      * Flow of N most recently added narrations represented by [BookCover] records.

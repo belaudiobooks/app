@@ -3,6 +3,7 @@ package by.audiobooks.mob.di
 import by.audiobooks.mob.data.Repository
 import by.audiobooks.mob.data.RepositoryImpl
 import by.audiobooks.mob.data.db.DatabaseHelper
+import by.audiobooks.mob.data.network.AlgoliaSearchApi
 import by.audiobooks.mob.data.network.SiteApi
 import by.audiobooks.mob.presentation.HomeViewModel
 import org.koin.core.context.startKoin
@@ -20,8 +21,9 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
 
 fun commonModule() = module {
     single { SiteApi() } // Network
+    single { AlgoliaSearchApi() } // Search
     single { DatabaseHelper(sqlDriver = get()) } // DB
-    single<Repository> { RepositoryImpl(dbHelper = get(), siteApi = get()) } // Repository
+    single<Repository> { RepositoryImpl(dbHelper = get(), siteApi = get(), algoliaSearchApi = get()) } // Repository
     // ViewModels:
     factory { HomeViewModel(repository = get()) }
 }

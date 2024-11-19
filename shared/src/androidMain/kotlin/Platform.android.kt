@@ -5,6 +5,7 @@ import by.audiobooks.mob.data.Repository
 import by.audiobooks.mob.data.RepositoryImpl
 import by.audiobooks.mob.data.db.AudiobooksByDB
 import by.audiobooks.mob.data.db.DatabaseHelper
+import by.audiobooks.mob.data.network.AlgoliaSearchApi
 import by.audiobooks.mob.data.network.SiteApi
 
 class AndroidPlatform : Platform {
@@ -16,6 +17,7 @@ actual fun getPlatform(): Platform = AndroidPlatform()
 fun getRepository(context: Context): Repository {
     return RepositoryImpl(
         dbHelper = DatabaseHelper(AndroidSqliteDriver(AudiobooksByDB.Schema, context, "audiobooks-by.db")),
-        siteApi = SiteApi()
+        siteApi = SiteApi(),
+        algoliaSearchApi = AlgoliaSearchApi()
     )
 }
