@@ -150,4 +150,99 @@ class BookRepoTest {
             ),
             true)
     }
+
+    @Test
+    fun getBooksDetailsByPublisherUuidTest() = runTest {
+        // Insert test data:
+        dbHelper.database.replaceData(DBTestData.testDataSnapshot)
+
+        // Subscribe
+        val booksDetails = dbHelper.getBooksDetailsByPublisherUuid("e82f5ab3-6c85-4d0a-8389-91a4ea484dae")
+            .stateIn(backgroundScope)
+        backgroundScope.launch { booksDetails.collect() }
+        runCurrent()
+
+        // Verify
+        assertNotNull(booksDetails)
+        assertEquals(booksDetails.value.size, 1)
+        assertEquals(booksDetails.value.map { it.uuid }
+            .containsAll(
+                listOf(
+                    "977e535e-1e2a-4c95-bf3b-629ff80aee94"
+                )
+            ),
+            true)
+    }
+
+    @Test
+    fun getBooksDetailsByAuthorUuidTest() = runTest {
+        // Insert test data:
+        dbHelper.database.replaceData(DBTestData.testDataSnapshot)
+
+        // Subscribe
+        val booksDetails = dbHelper.getBooksDetailsByAuthorUuid("e50f35f5-c134-4c82-90cc-8391fd676f3d")
+            .stateIn(backgroundScope)
+        backgroundScope.launch { booksDetails.collect() }
+        runCurrent()
+
+        // Verify
+        assertNotNull(booksDetails)
+        assertEquals(booksDetails.value.size, 1)
+        assertEquals(booksDetails.value.map { it.uuid }
+            .containsAll(
+                listOf(
+                    "977e535e-1e2a-4c95-bf3b-629ff80aee94"
+                )
+            ),
+            true)
+    }
+
+    @Test
+    fun getBooksDetailsByTranslatorUuidTest() = runTest {
+        // Insert test data:
+        dbHelper.database.replaceData(DBTestData.testDataSnapshot)
+
+        // Subscribe
+        val booksDetails = dbHelper.getBooksDetailsByTranslatorUuid("a240893c-a042-45fb-bcca-edee57961917")
+            .stateIn(backgroundScope)
+        backgroundScope.launch { booksDetails.collect() }
+        runCurrent()
+
+        // Verify
+        assertNotNull(booksDetails)
+        assertEquals(booksDetails.value.size, 2)
+        assertEquals(booksDetails.value.map { it.uuid }
+            .containsAll(
+                listOf(
+                    "98c04aca-9eae-4e45-aaf6-39f69aaf9da1",
+                    "5cf6f8bd-796c-43f8-9b32-8cd3dd58ab70"
+                )
+            ),
+            true)
+    }
+
+    @Test
+    fun getBooksDetailsByNarratorUuidTest() = runTest {
+        // Insert test data:
+        dbHelper.database.replaceData(DBTestData.testDataSnapshot)
+
+        // Subscribe
+        val booksDetails = dbHelper.getBooksDetailsByNarratorUuid("a240893c-a042-45fb-bcca-edee57961917")
+            .stateIn(backgroundScope)
+        backgroundScope.launch { booksDetails.collect() }
+        runCurrent()
+
+        // Verify
+        assertNotNull(booksDetails)
+        assertEquals(3, booksDetails.value.size)
+        assertEquals(booksDetails.value.map { it.uuid }
+            .containsAll(
+                listOf(
+                    "977e535e-1e2a-4c95-bf3b-629ff80aee94",
+                    "98c04aca-9eae-4e45-aaf6-39f69aaf9da1",
+                    "5cf6f8bd-796c-43f8-9b32-8cd3dd58ab70"
+                )
+            ),
+            true)
+    }
 }

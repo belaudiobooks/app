@@ -57,3 +57,38 @@ SELECT T_Book.uuid AS bookUuid,
 	   T_Book.description_source AS bookDescriptionSource
   FROM T_Book JOIN JT_Book_Tag ON T_Book.uuid = JT_Book_Tag.book_uuid
     WHERE JT_Book_Tag.tag_id = :tagId;
+
+selectBooksByPublisherUuid:
+SELECT T_Book.uuid AS bookUuid,
+	   T_Book.title AS bookTitle,
+	   T_Book.description AS bookDescription,
+	   T_Book.description_source AS bookDescriptionSource
+  FROM T_Book JOIN T_Narration ON T_Book.uuid = T_Narration.book_uuid
+              JOIN JT_Narration_Publisher ON T_Narration.uuid = JT_Narration_Publisher.narration_uuid
+  WHERE JT_Narration_Publisher.publisher_uuid = :publisherUuid;
+
+selectBooksByAuthorUuid:
+SELECT T_Book.uuid AS bookUuid,
+	   T_Book.title AS bookTitle,
+	   T_Book.description AS bookDescription,
+	   T_Book.description_source AS bookDescriptionSource
+  FROM T_Book JOIN JT_Book_Author ON T_Book.uuid = JT_Book_Author.book_uuid
+  WHERE JT_Book_Author.person_uuid = :authorUuid;
+
+selectBooksByTranslatorUuid:
+SELECT T_Book.uuid AS bookUuid,
+	   T_Book.title AS bookTitle,
+	   T_Book.description AS bookDescription,
+	   T_Book.description_source AS bookDescriptionSource
+  FROM T_Book JOIN T_Narration ON T_Book.uuid = T_Narration.book_uuid
+              JOIN JT_Narration_Translator ON T_Narration.uuid = JT_Narration_Translator.narration_uuid
+  WHERE JT_Narration_Translator.person_uuid = :translatorUuid;
+
+selectBooksByNarratorUuid:
+SELECT T_Book.uuid AS bookUuid,
+	   T_Book.title AS bookTitle,
+	   T_Book.description AS bookDescription,
+	   T_Book.description_source AS bookDescriptionSource
+  FROM T_Book JOIN T_Narration ON T_Book.uuid = T_Narration.book_uuid
+              JOIN JT_Narration_Narrator ON T_Narration.uuid = JT_Narration_Narrator.narration_uuid
+  WHERE JT_Narration_Narrator.person_uuid = :narratorUuid;

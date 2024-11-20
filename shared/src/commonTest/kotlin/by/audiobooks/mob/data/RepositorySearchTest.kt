@@ -32,13 +32,27 @@ class RepositorySearchTest {
     }
 
     @Test
-    fun getAllTagsTest() = runTest {
+    fun algoliaSearchIntegrationTest() = runTest {
         repo.refreshData()
         val hits = repo.search("яну").first()
         assertNotNull(hits)
         assertTrue { hits.publisherHits.isNotEmpty() }
         assertTrue { hits.bookHits.isNotEmpty() }
         assertTrue { hits.personHits.isNotEmpty() }
+    }
+
+    @Test
+    fun getBooksDetailsByPersonUuidIntegrationTest() = runTest {
+        repo.refreshData()
+        // Test relies on real data and assume that person 'bb703f23-b3cd-4c42-8a2b-5109042bf368'
+        // has authored, translated and narrated books.
+        val bookDetailsCollection = repo.getBooksDetailsByPersonUuid(
+            "bb703f23-b3cd-4c42-8a2b-5109042bf368"
+        ).first()
+        assertNotNull(bookDetailsCollection)
+        assertTrue { bookDetailsCollection.authoredBooksDetails.isNotEmpty() }
+        assertTrue { bookDetailsCollection.translatedBooksDetails.isNotEmpty() }
+        assertTrue { bookDetailsCollection.narratedBooksDetails.isNotEmpty() }
     }
 
 }

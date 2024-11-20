@@ -11,6 +11,7 @@ import by.audiobooks.mob.domain.Link
 import by.audiobooks.mob.domain.LinkType
 import by.audiobooks.mob.domain.Narration
 import by.audiobooks.mob.domain.Person
+import by.audiobooks.mob.domain.PersonsBooksDetails
 import by.audiobooks.mob.domain.Publisher
 import by.audiobooks.mob.domain.SearchResults
 import by.audiobooks.mob.domain.Tag
@@ -51,6 +52,17 @@ class RepositoryImpl(
     override fun getBookDetails(bookUuid: String): Flow<BookDetails>  = dbHelper.getBookDetails(bookUuid)
 
     override fun getBooksDetailsByTagId(id: Long): Flow<List<BookDetails>> = dbHelper.getBooksDetailsByTagId(id)
+
+    override fun getBooksDetailsByPublisherUuid(publisherUuid: String): Flow<List<BookDetails>> =
+        dbHelper.getBooksDetailsByPublisherUuid(publisherUuid)
+
+    override fun getBooksDetailsByPersonUuid(personUuid: String): Flow<PersonsBooksDetails> {
+        return combine(
+            dbHelper.getBooksDetailsByAuthorUuid(personUuid),
+            dbHelper.getBooksDetailsByTranslatorUuid(personUuid),
+            dbHelper.getBooksDetailsByNarratorUuid(personUuid)
+        ) { authored, translated, narrated -> PersonsBooksDetails(authored, translated, narrated) }
+    }
 
     override fun getAllNarrations(): Flow<List<Narration>> = dbHelper.getAllNarrations()
 
