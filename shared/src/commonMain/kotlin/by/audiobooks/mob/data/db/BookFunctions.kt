@@ -74,3 +74,15 @@ internal fun AudiobooksByDB.getBookByUuid(bookUuid: String, context: CoroutineCo
 
 internal fun AudiobooksByDB.getBooksByTagId(tagId: Long, context: CoroutineContext = Dispatchers.IO): Flow<List<SelectBooksByTagId>> =
     bookQueries.selectBooksByTagId(tagId).asFlow().mapToList(context)
+
+internal fun AudiobooksByDB.getBooksByPublisherUuid(publisherUuid: String, context: CoroutineContext = Dispatchers.IO): Flow<List<SelectBooksByPublisherUuid>> =
+    bookQueries.selectBooksByPublisherUuid(publisherUuid).asFlow().mapToList(context)
+
+internal fun AudiobooksByDB.getBooksByAuthorUuid(authorUuid: String, context: CoroutineContext = Dispatchers.IO): Flow<List<SelectBooksByAuthorUuid>> =
+    bookQueries.selectBooksByAuthorUuid(authorUuid).asFlow().mapToList(context)
+
+internal fun AudiobooksByDB.getBooksByTranslatorUuid(translatorUuid: String, context: CoroutineContext = Dispatchers.IO): Flow<List<SelectBooksByTranslatorUuid>> =
+    bookQueries.selectBooksByTranslatorUuid(translatorUuid).asFlow().mapToList(context)
+
+internal fun AudiobooksByDB.getBooksByNarratorUuid(narratorUuid: String, context: CoroutineContext = Dispatchers.IO): Flow<List<SelectBooksByNarratorUuid>> =
+    bookQueries.selectBooksByNarratorUuid(narratorUuid).asFlow().mapToList(context)

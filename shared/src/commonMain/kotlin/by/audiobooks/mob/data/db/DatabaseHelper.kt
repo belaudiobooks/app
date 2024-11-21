@@ -64,6 +64,66 @@ class DatabaseHelper(sqlDriver: SqlDriver) {
             }
         }
 
+    fun getBooksDetailsByPublisherUuid(publisherUuid: String): Flow<List<BookDetails>> =
+        database.getBooksByPublisherUuid(publisherUuid).map {
+            it.map { book ->
+                BookDetails(
+                    uuid = book.bookUuid,
+                    title = book.bookTitle,
+                    description = book.bookDescription,
+                    descriptionSource = book.bookDescriptionSource,
+                    narrations = database.getNarrationsWithDetailsByBookUuid(book.bookUuid),
+                    authors = database.getAuthorsByBookUuid(book.bookUuid),
+                    tags = database.getTagsByBookUuid(book.bookUuid)
+                )
+            }
+        }
+
+    fun getBooksDetailsByAuthorUuid(personUuid: String): Flow<List<BookDetails>> =
+        database.getBooksByAuthorUuid(personUuid).map {
+            it.map { book ->
+                BookDetails(
+                    uuid = book.bookUuid,
+                    title = book.bookTitle,
+                    description = book.bookDescription,
+                    descriptionSource = book.bookDescriptionSource,
+                    narrations = database.getNarrationsWithDetailsByBookUuid(book.bookUuid),
+                    authors = database.getAuthorsByBookUuid(book.bookUuid),
+                    tags = database.getTagsByBookUuid(book.bookUuid)
+                )
+            }
+        }
+
+    fun getBooksDetailsByTranslatorUuid(personUuid: String): Flow<List<BookDetails>> =
+        database.getBooksByTranslatorUuid(personUuid).map {
+            it.map { book ->
+                BookDetails(
+                    uuid = book.bookUuid,
+                    title = book.bookTitle,
+                    description = book.bookDescription,
+                    descriptionSource = book.bookDescriptionSource,
+                    narrations = database.getNarrationsWithDetailsByBookUuid(book.bookUuid),
+                    authors = database.getAuthorsByBookUuid(book.bookUuid),
+                    tags = database.getTagsByBookUuid(book.bookUuid)
+                )
+            }
+        }
+
+    fun getBooksDetailsByNarratorUuid(personUuid: String): Flow<List<BookDetails>> =
+        database.getBooksByNarratorUuid(personUuid).map {
+            it.map { book ->
+                BookDetails(
+                    uuid = book.bookUuid,
+                    title = book.bookTitle,
+                    description = book.bookDescription,
+                    descriptionSource = book.bookDescriptionSource,
+                    narrations = database.getNarrationsWithDetailsByBookUuid(book.bookUuid),
+                    authors = database.getAuthorsByBookUuid(book.bookUuid),
+                    tags = database.getTagsByBookUuid(book.bookUuid)
+                )
+            }
+        }
+
     fun getAllNarrations(): Flow<List<Narration>> = database.getAllNarrations()
 
     fun getAllPersons(): Flow<List<Person>> = database.getAllPersons()

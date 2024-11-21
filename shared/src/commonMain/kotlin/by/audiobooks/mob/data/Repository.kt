@@ -7,6 +7,7 @@ import by.audiobooks.mob.domain.Link
 import by.audiobooks.mob.domain.LinkType
 import by.audiobooks.mob.domain.Narration
 import by.audiobooks.mob.domain.Person
+import by.audiobooks.mob.domain.PersonsBooksDetails
 import by.audiobooks.mob.domain.Publisher
 import by.audiobooks.mob.domain.SearchResults
 import by.audiobooks.mob.domain.Tag
@@ -49,6 +50,16 @@ interface Repository {
      * Get subscription to list of [BookDetails] by tag id.
      */
     fun getBooksDetailsByTagId(id: Long): Flow<List<BookDetails>>
+
+    /**
+     * Get subscription to list of [BookDetails] by publisher uuid.
+     */
+    fun getBooksDetailsByPublisherUuid(publisherUuid: String): Flow<List<BookDetails>>
+
+    /**
+     * Get subscription to collection of [BooksDetails] by person uuid.
+     */
+    fun getBooksDetailsByPersonUuid(personUuid: String): Flow<PersonsBooksDetails>
 
     /**
      * Flow of all [Book] records from database. It emits a new list every
