@@ -11,14 +11,34 @@ import SwiftUI
 struct CategoryView<Content: View>: View {
   private let title: String
   @ViewBuilder var content: () -> Content
+  private let onTapAction: (() -> Void)?
   
-  init(title: String, @ViewBuilder content: @escaping () -> Content) {
+  init(
+    title: String,
+    onTapAction: (() -> Void)? = nil,
+    @ViewBuilder content: @escaping () -> Content) {
     self.title = title
     self.content = content
+    self.onTapAction = onTapAction
   }
+  
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
-      Text(title)
+      
+      HStack(spacing: 4) {
+        Text(title)
+          .font(._title3)
+        Spacer()
+        if onTapAction != nil {
+          Image(systemName: "chevron.forward")
+            .font(._iconSemibold)
+        }
+      }
+      .padding(.horizontal, 20)
+      .onTapGesture {
+        onTapAction?()
+      }
+      
       content()
     }
   }

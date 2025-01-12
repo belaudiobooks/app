@@ -15,14 +15,14 @@ struct HomeView: ComponentView {
     NavigationView {
       ScrollView(.vertical) {
         VStack {
-          CategoryView(title: "New") {
+          CategoryView(title: "New", onTapAction: { store.handle(.selectedCategory(sectionIndex: 0)) }) {
             BookRowView(books: store.state.newCategory) { bookID in
               store.handle(.selctedBookCover(id: bookID))
             }
           }
           
-          ForEach(store.state.curatedCategories, id: \.id){ category in
-            CategoryView(title: category.name) {
+          ForEach(Array(store.state.curatedCategories.enumerated()), id: \.1.id) { index, category in
+            CategoryView(title: category.name, onTapAction: { store.handle(.selectedCategory(sectionIndex: index + 1)) }) {
               BookRowView(books: category.books) { bookID in
                 store.handle(.selctedBookCover(id: bookID))
               }
