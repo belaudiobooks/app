@@ -15,7 +15,7 @@ struct BookRowView: View {
   
   var body: some View {
     ScrollView(.horizontal, showsIndicators: false) {
-      LazyHStack {
+      HStack {
         ForEach(books) { book in
           BookCoverView(book: book) { bookId in
             action(bookId)

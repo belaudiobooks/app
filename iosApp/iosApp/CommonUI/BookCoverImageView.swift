@@ -9,42 +9,35 @@
 import SwiftUI
 
 struct BookCoverImageView: View {
-  let imageURL: String
-  let fallbackState: FallbackView.State
+  let bookImage: BookImage
   
   var body: some View {
     VStack(alignment: .leading) {
-      AsyncImage(url: URL(string: imageURL)) { phase in
-        switch phase {
-        case .failure:
-          FallbackView(state: fallbackState)
-        case .success(let image):
-          image
-            .resizable()
-        default:
-          ProgressView()
-        }
-      }
+      ABAsyncImageView(
+        url: URL(string: bookImage.imageURL),
+        content: { image in image.resizable()},
+        loading: { ProgressView() },
+        error: { FallbackView(
+          authorName: bookImage.authorName,
+          title: bookImage.title,
+          gradientColors: bookImage.gradientColors) })
+      
       .clipShape(.rect(cornerRadius: 10))
     }
   }
 }
 
 struct FallbackView: View {
-  struct State {
-    let authorName: String
-    let title: String
-    let color: Color
-  }
-  
-  let state: State
+  let authorName: String
+  let title: String
+  let gradientColors: [Color]
   
   var body: some View {
     ZStack {
       Color.purple
         .ignoresSafeArea()
         .overlay(
-          LinearGradient(colors: [.purple, .pink], startPoint: .top, endPoint: .bottom)
+          LinearGradient(colors: gradientColors, startPoint: .top, endPoint: .bottom)
             .opacity(0.3)
         )
         .background(
@@ -54,7 +47,7 @@ struct FallbackView: View {
         )
       
       VStack(spacing: 20) {
-        Text(state.authorName)
+        Text(authorName)
           .font(._title3)
           .foregroundColor(.white)
         
@@ -63,7 +56,7 @@ struct FallbackView: View {
           .frame(height: 4)
           .frame(maxWidth: 150)
         
-        Text(state.title)
+        Text(title)
           .font(._title3)
           .fontWeight(.bold)
           .foregroundColor(.white)
@@ -73,19 +66,17 @@ struct FallbackView: View {
 }
 
 #Preview {
-  BookCoverImageView(
+  BookCoverImageView(bookImage: .init(
     imageURL: "https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg",
-    fallbackState: .init(
-      authorName: "Іван Свістулькін",
-      title: "Доўгая дарога дадому",
-      color: .green))
+    authorName: "Іван Свістулькін",
+    title: "Доўгая дарога дадому",
+    gradientColors: [.pink, .purple]))
 }
 
 #Preview {
-  BookCoverImageView(
+  BookCoverImageView(bookImage: .init(
     imageURL: "https://storage.googleapis.com/books_media/covers/liubits-noch-prava.jpg",
-    fallbackState: .init(
-      authorName: "Іван Свістулькін",
-      title: "Доўгая дарога дадому",
-      color: .green))
+    authorName: "Іван Свістулькін",
+    title: "Доўгая дарога дадому",
+    gradientColors: [.pink, .purple]))
 }

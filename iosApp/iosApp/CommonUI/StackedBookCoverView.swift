@@ -9,15 +9,15 @@
 import SwiftUI
 
 struct StackedBookCoverView: View {
-  let imageURLs: [String]
+  let bookImages: [BookImage]
   
-  var totalOffset: Double { 10 * Double((imageURLs.count - 1)) }
+  var totalOffset: Double { 10 * Double((bookImages.count - 1)) }
   var itemSize: Double { 150 - totalOffset }
   
   var body: some View {
     ZStack {
-      ForEach(0..<imageURLs.count, id: \.self) { index in
-        BookCoverImageView(imageURL: imageURLs[index])
+      ForEach(0..<bookImages.count, id: \.self) { index in
+        BookCoverImageView(bookImage: bookImages[index])
           .frame(width: itemSize, height: itemSize)
           .offset(x: CGFloat(index) * 10, y: CGFloat(index) * 10)
       }
@@ -29,19 +29,43 @@ struct StackedBookCoverView: View {
 
 #Preview {
   VStack(alignment: .leading) {
-    StackedBookCoverView(imageURLs: [
-      "https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg",
-      "https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg",
-      "https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg"
+    StackedBookCoverView(bookImages: [
+      BookImage(
+        imageURL: "https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg",
+        authorName: "Іван Свістулькін",
+        title: "Доўгая дарога дадому",
+        gradientColors: [.pink, .purple]),
+      BookImage(
+        imageURL: "https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg",
+        authorName: "Іван Свістулькін",
+        title: "Доўгая дарога дадому",
+        gradientColors: [.pink, .purple]),
+      BookImage(
+        imageURL: "https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg",
+        authorName: "Іван Свістулькін",
+        title: "Доўгая дарога дадому",
+        gradientColors: [.pink, .purple]),
     ])
     
-    StackedBookCoverView(imageURLs: [
-      "https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg",
-      "https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg"
+    StackedBookCoverView(bookImages: [
+      BookImage(
+        imageURL: "https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg",
+        authorName: "Іван Свістулькін",
+        title: "Доўгая дарога дадому",
+        gradientColors: [.pink, .purple]),
+      BookImage(
+        imageURL: "https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg",
+        authorName: "Іван Свістулькін",
+        title: "Доўгая дарога дадому",
+        gradientColors: [.pink, .purple])
     ])
     
-    StackedBookCoverView(imageURLs: [
-      "https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg"
+    StackedBookCoverView(bookImages: [
+      BookImage(
+        imageURL: "https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg",
+        authorName: "Іван Свістулькін",
+        title: "Доўгая дарога дадому",
+        gradientColors: [.pink, .purple]),
     ])
   }
 }

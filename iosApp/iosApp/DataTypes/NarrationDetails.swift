@@ -8,6 +8,7 @@
 
 import Foundation
 import Shared
+import SwiftUI
 
 struct NarrationDetails: Equatable, Identifiable {
   var id: String { uuid }
@@ -19,6 +20,13 @@ struct NarrationDetails: Equatable, Identifiable {
   let duration: String
   let cost: Bool
   let streamingServices: [StreamingService]
+  let authorsName: String
+  let bookTitle: String
+  let fallbackColorGradient: [Color]
+  
+  var bookImage: BookImage {
+    .init(imageURL: coverImageURL, authorName: authorsName, title: bookTitle, gradientColors: fallbackColorGradient)
+  }
 }
 
 extension NarrationDetails {
@@ -31,5 +39,8 @@ extension NarrationDetails {
     duration = narrationDetails.duration.description
     cost = narrationDetails.paid
     streamingServices = narrationDetails.links.map { .init(linkDetails: $0) }
+    authorsName = "Hardcoded name"
+    bookTitle = "Hardcoded title"
+    fallbackColorGradient = [Color.pink, Color.purple]
   }
 }

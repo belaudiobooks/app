@@ -22,6 +22,9 @@
 		A53BA86F2CEC544700DFBFAB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA86E2CEC544700DFBFAB /* Colors.swift */; };
 		A53BA8732CEC584500DFBFAB /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA8722CEC584500DFBFAB /* Fonts.swift */; };
 		A53BA8762CEC5F0B00DFBFAB /* BookCollectionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA8752CEC5F0B00DFBFAB /* BookCollectionComponent.swift */; };
+		A53BA8782D33875200DFBFAB /* BookImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA8772D33875200DFBFAB /* BookImage.swift */; };
+		A53BA87B2D348A7000DFBFAB /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA87A2D348A7000DFBFAB /* ImageLoader.swift */; };
+		A53BA87D2D348B9B00DFBFAB /* ABAsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA87C2D348B9B00DFBFAB /* ABAsyncImageView.swift */; };
 		A562F5B52C8436D5005731B1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562F5B42C8436D5005731B1 /* ViewModel.swift */; };
 		A562F5B72C84374A005731B1 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562F5B62C84374A005731B1 /* Component.swift */; };
 		A562F5BD2C843BAB005731B1 /* HomeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562F5BC2C843BAB005731B1 /* HomeComponent.swift */; };
@@ -56,6 +59,9 @@
 		A53BA86E2CEC544700DFBFAB /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		A53BA8722CEC584500DFBFAB /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		A53BA8752CEC5F0B00DFBFAB /* BookCollectionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionComponent.swift; sourceTree = "<group>"; };
+		A53BA8772D33875200DFBFAB /* BookImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookImage.swift; sourceTree = "<group>"; };
+		A53BA87A2D348A7000DFBFAB /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		A53BA87C2D348B9B00DFBFAB /* ABAsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABAsyncImageView.swift; sourceTree = "<group>"; };
 		A562F5B42C8436D5005731B1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		A562F5B62C84374A005731B1 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		A562F5BC2C843BAB005731B1 /* HomeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeComponent.swift; sourceTree = "<group>"; };
@@ -165,6 +171,15 @@
 			path = BookCollection;
 			sourceTree = "<group>";
 		};
+		A53BA8792D3489F700DFBFAB /* ABAsyncImageView */ = {
+			isa = PBXGroup;
+			children = (
+				A53BA87A2D348A7000DFBFAB /* ImageLoader.swift */,
+				A53BA87C2D348B9B00DFBFAB /* ABAsyncImageView.swift */,
+			);
+			path = ABAsyncImageView;
+			sourceTree = "<group>";
+		};
 		A562F5B12C84368C005731B1 /* Pattern */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +237,7 @@
 				A562F5D12C857450005731B1 /* TestData.swift */,
 				A53BA8632CE1CA3A00DFBFAB /* NarrationDetails.swift */,
 				A53BA8692CE5BBB500DFBFAB /* StreamingService.swift */,
+				A53BA8772D33875200DFBFAB /* BookImage.swift */,
 			);
 			path = DataTypes;
 			sourceTree = "<group>";
@@ -229,6 +245,7 @@
 		A562F5C32C850E27005731B1 /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
+				A53BA8792D3489F700DFBFAB /* ABAsyncImageView */,
 				A53BA86B2CEC4DC600DFBFAB /* Design */,
 				A562F5C42C850E3C005731B1 /* CategoryView.swift */,
 				A562F5C62C850E74005731B1 /* BookCoverView.swift */,
@@ -365,11 +382,13 @@
 				A562F5B72C84374A005731B1 /* Component.swift in Sources */,
 				A562F5C52C850E3C005731B1 /* CategoryView.swift in Sources */,
 				A53BA8732CEC584500DFBFAB /* Fonts.swift in Sources */,
+				A53BA87B2D348A7000DFBFAB /* ImageLoader.swift in Sources */,
 				A562F5BD2C843BAB005731B1 /* HomeComponent.swift in Sources */,
 				A50009A92CA3BAA1000E4A34 /* StackedBookCoverView.swift in Sources */,
 				A562F5C72C850E74005731B1 /* BookCoverView.swift in Sources */,
 				A562F5D22C857450005731B1 /* TestData.swift in Sources */,
 				A53BA86F2CEC544700DFBFAB /* Colors.swift in Sources */,
+				A53BA8782D33875200DFBFAB /* BookImage.swift in Sources */,
 				A562F5CC2C856F77005731B1 /* BookDetailsView.swift in Sources */,
 				A562F5C92C8514C6005731B1 /* BookRowView.swift in Sources */,
 				A53BA86A2CE5BBB500DFBFAB /* StreamingService.swift in Sources */,
@@ -386,6 +405,7 @@
 				A562F5D42C867BFB005731B1 /* Router.swift in Sources */,
 				A562F5BF2C850576005731B1 /* HomeView.swift in Sources */,
 				A562F5B52C8436D5005731B1 /* ViewModel.swift in Sources */,
+				A53BA87D2D348B9B00DFBFAB /* ABAsyncImageView.swift in Sources */,
 				A53BA8622CE1C99100DFBFAB /* BookDetails.swift in Sources */,
 				A562F5D02C856FF5005731B1 /* Category.swift in Sources */,
 				A53BA8682CE3202E00DFBFAB /* NarrationView.swift in Sources */,
