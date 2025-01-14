@@ -13,7 +13,7 @@ struct BookCover: Equatable, Identifiable {
   var id: String { uuid }
   let uuid: String
   let title: String
-  let coverImageURL: [String]
+  let bookImages: [BookImage]
   let description: String
   let authors: [Author]
   let tags: [String]
@@ -21,9 +21,11 @@ struct BookCover: Equatable, Identifiable {
 
 extension BookCover {
   init(bookCover: Shared.BookCover) {
+    print(bookCover.coverImage)
     uuid = bookCover.uuid
     title = bookCover.title
-    coverImageURL = [bookCover.coverImage]
+    let urls: String = bookCover.coverImage
+    bookImages = [BookImage(imageURL: String(bookCover.coverImage), authorName: bookCover.authors[0].name, title: bookCover.title, gradientColors: [.pink, .purple])]
     description = bookCover.description_
     authors = bookCover.authors.map { .init(author: $0) }
     tags = bookCover.tags.map { $0.name }
@@ -32,7 +34,7 @@ extension BookCover {
   init(bookDetails: BookDetails) {
     uuid = bookDetails.uuid
     title = bookDetails.title
-    coverImageURL = bookDetails.narrations.map { $0.coverImageURL }
+    bookImages = bookDetails.narrations.map { $0.bookImage }
     description = bookDetails.description
     authors = bookDetails.authors
     tags = bookDetails.tags

@@ -10,9 +10,15 @@ import SwiftUI
 
 struct NarrationView: View {
   let narration: NarrationDetails
+  
     var body: some View {
       HStack(spacing: 12) {
-        BookCoverImageView(imageURL: narration.coverImageURL)
+        BookCoverImageView(
+          bookImage: .init(
+            imageURL: narration.coverImageURL,
+            authorName: narration.authorsName,
+            title: narration.bookTitle,
+            gradientColors: narration.fallbackColorGradient))
           .frame(width: 180, height: 180)
         VStack(alignment: .leading, spacing: 8) {
           NarrationTextContainerView(title: "Narrator:", description: narration.narrator)
@@ -51,5 +57,9 @@ struct NarrationTextContainerView: View {
     language: "беларуская",
     duration: "16 гадзін 52 хвіліны",
     cost: true,
-    streamingServices: []))
+    streamingServices: [],
+    authorsName: "Іван Свістулькін",
+    bookTitle: "Доўгая дарога дадому",
+    fallbackColorGradient: [.pink, .purple]
+  ))
 }
