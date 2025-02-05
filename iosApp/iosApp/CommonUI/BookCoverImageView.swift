@@ -47,19 +47,22 @@ struct FallbackView: View {
         )
       
       VStack(spacing: 20) {
+        Spacer()
         Text(authorName)
-          .font(._title3)
           .foregroundColor(.white)
+          .padding(.horizontal, 8)
         
         Rectangle()
           .fill(Color.purple)
           .frame(height: 4)
           .frame(maxWidth: 150)
+          .padding(.horizontal, 16)
         
         Text(title)
-          .font(._title3)
-          .fontWeight(.bold)
+          .font(._iconSemibold)
           .foregroundColor(.white)
+          .padding(.horizontal, 8)
+        Spacer()
       }
     }
   }

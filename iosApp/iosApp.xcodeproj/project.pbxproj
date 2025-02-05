@@ -25,6 +25,8 @@
 		A53BA8782D33875200DFBFAB /* BookImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA8772D33875200DFBFAB /* BookImage.swift */; };
 		A53BA87B2D348A7000DFBFAB /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA87A2D348A7000DFBFAB /* ImageLoader.swift */; };
 		A53BA87D2D348B9B00DFBFAB /* ABAsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA87C2D348B9B00DFBFAB /* ABAsyncImageView.swift */; };
+		A53BA87F2D473CF700DFBFAB /* ColorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA87E2D473CF700DFBFAB /* ColorProvider.swift */; };
+		A53BA8812D474D7D00DFBFAB /* BookGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA8802D474D7D00DFBFAB /* BookGridView.swift */; };
 		A562F5B52C8436D5005731B1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562F5B42C8436D5005731B1 /* ViewModel.swift */; };
 		A562F5B72C84374A005731B1 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562F5B62C84374A005731B1 /* Component.swift */; };
 		A562F5BD2C843BAB005731B1 /* HomeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562F5BC2C843BAB005731B1 /* HomeComponent.swift */; };
@@ -62,6 +64,8 @@
 		A53BA8772D33875200DFBFAB /* BookImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookImage.swift; sourceTree = "<group>"; };
 		A53BA87A2D348A7000DFBFAB /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		A53BA87C2D348B9B00DFBFAB /* ABAsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABAsyncImageView.swift; sourceTree = "<group>"; };
+		A53BA87E2D473CF700DFBFAB /* ColorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorProvider.swift; sourceTree = "<group>"; };
+		A53BA8802D474D7D00DFBFAB /* BookGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookGridView.swift; sourceTree = "<group>"; };
 		A562F5B42C8436D5005731B1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		A562F5B62C84374A005731B1 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		A562F5BC2C843BAB005731B1 /* HomeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeComponent.swift; sourceTree = "<group>"; };
@@ -253,6 +257,7 @@
 				A50009A82CA3BAA1000E4A34 /* StackedBookCoverView.swift */,
 				A562F5C82C8514C6005731B1 /* BookRowView.swift */,
 				A53BA8672CE3202E00DFBFAB /* NarrationView.swift */,
+				A53BA8802D474D7D00DFBFAB /* BookGridView.swift */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -271,6 +276,7 @@
 			children = (
 				A562F5D62C86D737005731B1 /* Services.swift */,
 				A50009AA2CAA5AA1000E4A34 /* RepositoryClient.swift */,
+				A53BA87E2D473CF700DFBFAB /* ColorProvider.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -404,8 +410,10 @@
 				A50009A72CA3B7BA000E4A34 /* BookCoverImageView.swift in Sources */,
 				A562F5D42C867BFB005731B1 /* Router.swift in Sources */,
 				A562F5BF2C850576005731B1 /* HomeView.swift in Sources */,
+				A53BA8812D474D7D00DFBFAB /* BookGridView.swift in Sources */,
 				A562F5B52C8436D5005731B1 /* ViewModel.swift in Sources */,
 				A53BA87D2D348B9B00DFBFAB /* ABAsyncImageView.swift in Sources */,
+				A53BA87F2D473CF700DFBFAB /* ColorProvider.swift in Sources */,
 				A53BA8622CE1C99100DFBFAB /* BookDetails.swift in Sources */,
 				A562F5D02C856FF5005731B1 /* Category.swift in Sources */,
 				A53BA8682CE3202E00DFBFAB /* NarrationView.swift in Sources */,

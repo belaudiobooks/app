@@ -8,36 +8,36 @@
 
 import Foundation
 import Shared
+import SwiftUI
 
 struct BookCover: Equatable, Identifiable {
   var id: String { uuid }
   let uuid: String
   let title: String
   let bookImages: [BookImage]
-  let description: String
-  let authors: [Author]
-  let tags: [String]
+  let authorsName: String
 }
 
 extension BookCover {
-  init(bookCover: Shared.BookCover) {
-    print(bookCover.coverImage)
+  init(bookCover: Shared.BookCover, gradientColorProvider: (String) -> (Color, Color)) {
     uuid = bookCover.uuid
     title = bookCover.title
-    let urls: String = bookCover.coverImage
-    bookImages = [BookImage(imageURL: String(bookCover.coverImage), authorName: bookCover.authors[0].name, title: bookCover.title, gradientColors: [.pink, .purple])]
-    description = bookCover.description_
-    authors = bookCover.authors.map { .init(author: $0) }
-    tags = bookCover.tags.map { $0.name }
+    let colors = gradientColorProvider(bookCover.uuid)
+    bookImages = [
+      BookImage(
+        imageURL: String(bookCover.coverImage),
+        authorName: bookCover.authors[0].name,
+        title: bookCover.title,
+        gradientColors: [colors.0, colors.1])
+    ]
+    authorsName = bookCover.authors.map { $0.name }.first ?? ""
   }
   
   init(bookDetails: BookDetails) {
     uuid = bookDetails.uuid
     title = bookDetails.title
     bookImages = bookDetails.narrations.map { $0.bookImage }
-    description = bookDetails.description
-    authors = bookDetails.authors
-    tags = bookDetails.tags
+    authorsName = bookDetails.authors.map { $0.name }.first ?? ""
   }
 }
 

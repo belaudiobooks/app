@@ -47,7 +47,7 @@ class BookDetailsViewModel: ViewModel {
   private func setObservations() {
     Task {
       for await bookDetails in services.repositoryClient.repository.getBookDetails(bookUuid: self.arguments.bookID) {
-        state.book = BookDetails(bookDetails: bookDetails)
+        state.book = BookDetails(bookDetails: bookDetails, colorProvider: services.colorProvider.colors)
       }
     }
   }

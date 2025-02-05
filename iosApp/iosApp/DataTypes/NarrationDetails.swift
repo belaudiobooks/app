@@ -30,7 +30,11 @@ struct NarrationDetails: Equatable, Identifiable {
 }
 
 extension NarrationDetails {
-  init(narrationDetails: Shared.NarrationDetails) {
+  init(
+    narrationDetails: Shared.NarrationDetails,
+    bookTitle: String,
+    authorsName: String,
+    colorProvider: (String) -> (Color, Color)) {
     uuid = narrationDetails.bookUuid
     coverImageURL = narrationDetails.coverImage
     narrator = narrationDetails.narrators.first?.name ?? ""
@@ -39,8 +43,9 @@ extension NarrationDetails {
     duration = narrationDetails.duration.description
     cost = narrationDetails.paid
     streamingServices = narrationDetails.links.map { .init(linkDetails: $0) }
-    authorsName = "Hardcoded name"
-    bookTitle = "Hardcoded title"
-    fallbackColorGradient = [Color.pink, Color.purple]
+    self.authorsName = authorsName
+    self.bookTitle = bookTitle
+    let colors = colorProvider(narrationDetails.bookUuid)
+    fallbackColorGradient = [colors.0, colors.1]
   }
 }
