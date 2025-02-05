@@ -11,7 +11,8 @@ struct iOSApp: App {
     let router = Router(selectedTab: 0)
     self.router = router
     self.repositoryClient = RepositoryClient()
-    services = Services(router: router, repositoryClient: repositoryClient)
+    let colorProvider = ColorProvider()
+    services = Services(router: router, repositoryClient: repositoryClient, colorProvider: colorProvider)
     homeComponent = HomeComponent(arguments: HomeArguments(), services: services, delegate: nil)
   }
   

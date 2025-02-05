@@ -17,9 +17,8 @@ let testBooks = [
       authorName: "Іван Свістулькін",
       title: "Доўгая дарога дадому",
       gradientColors: [.pink, .purple])],
-    description: "Description One",
-    authors: [],
-    tags: []),
+    authorsName: "Іван Свістулькін"
+),
   BookCover(
     uuid: "2",
     title: "Book Two",
@@ -28,9 +27,7 @@ let testBooks = [
       authorName: "Іван Свістулькін",
       title: "Доўгая дарога дадому",
       gradientColors: [.pink, .purple])],
-    description: "Description One",
-    authors: [],
-    tags: []),
+    authorsName: "Іван Свістулькін"),
   BookCover(
     uuid: "3",
     title: "Book Three",
@@ -39,9 +36,7 @@ let testBooks = [
       authorName: "Іван Свістулькін",
       title: "Доўгая дарога дадому",
       gradientColors: [.pink, .purple])],
-    description: "Description One",
-    authors: [],
-    tags: []),
+    authorsName: "Іван Свістулькін"),
   BookCover(
     uuid: "4",
     title: "Book Four",
@@ -50,9 +45,7 @@ let testBooks = [
       authorName: "Іван Свістулькін",
       title: "Доўгая дарога дадому",
       gradientColors: [.pink, .purple])],
-    description: "Description One",
-    authors: [],
-    tags: [])
+    authorsName: "Іван Свістулькін")
 ]
 
 let testBookDetails = BookDetails(
