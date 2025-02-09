@@ -1,5 +1,6 @@
 package by.audiobooks.mob.data.db
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -25,6 +26,7 @@ class PersonRepoTest {
         dbHelper.database.cleanUpDB()
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getAllPersonsTest() = runTest {
         val state = dbHelper.database.getAllPersons(UnconfinedTestDispatcher()).stateIn(backgroundScope)
@@ -67,6 +69,7 @@ class PersonRepoTest {
         assertEquals("Updated-Name", testUpdatedPerson?.name)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getPersonByUuidSubscriptionTest() = runTest {
         // Insert test data:
@@ -90,6 +93,7 @@ class PersonRepoTest {
         assertEquals("Updated-Name", state.value.name)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getAuthorsByBookUuidSubscriptionTest() = runTest {
         val state = dbHelper.database.getAuthorsByBookUuidSubscription("977e535e-1e2a-4c95-bf3b-629ff80aee94", UnconfinedTestDispatcher()).stateIn(backgroundScope)
@@ -105,6 +109,7 @@ class PersonRepoTest {
         assertEquals("e50f35f5-c134-4c82-90cc-8391fd676f3d", state.value.first().uuid)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getAuthorsByBookUuidTest() = runTest {
         // Insert data snapshot

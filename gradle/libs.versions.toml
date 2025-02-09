@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.2" # AGP - Android Gradle Plugin
+agp = "8.7.2" # AGP - Android Gradle Plugin
 android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
@@ -12,8 +12,9 @@ androidx-material = "1.11.0"
 androidx-test-junit = "1.1.5"
 androidx-lifecycle = "2.8.3"
 androidx-work-runtime-ktx = "2.9.0"
-compose = "1.7.5"
-compose-multiplatform = "1.7.0"
+androidx-palette-ktx = "1.0.0"
+androidx-compose-bom = "2024.12.01"
+compose-multiplatform = "1.7.1"
 junit = "4.13.2"
 kotlin = "2.0.21"
 kotlinx-serialization = "1.7.3"
@@ -22,7 +23,7 @@ kotlinx-coroutines = "1.9.0"
 ktor = "3.0.1"
 sqldelight = "2.0.2"
 koin = "4.0.0"
-napier = "2.7.1"
+coil = "3.0.4"
 skie = "0.9.3"
 algolia = "3.10.0"
 
@@ -37,30 +38,34 @@ ktor-contentEncoding = { module = "io.ktor:ktor-client-encoding", version.ref = 
 ktor-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 ktor-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
-androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-common = { group = "androidx.lifecycle", name = "lifecycle-common", version.ref = "androidx-lifecycle" }
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core-ktx" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-espresso-core" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidx-appcompat" }
-androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidx-material" }
-androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
-androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 sqldelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqldelight" }
 sqldelight-androidDriver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
 sqldelight-nativeDriver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
 sqldelight-jvm = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
 sqldelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
-koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
-koin-compose-multiplatform = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
-androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "androidx-work-runtime-ktx" }
-napier = { module = "io.github.aakira:napier", version.ref ="napier" }
 algolia-search = { module = "com.algolia:algoliasearch-client-kotlin", version.ref ="algolia" }
-
+# Android:
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidx-compose-bom" }
+androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
+androidx-compose-material3-adaptive-navigation = { module = "androidx.compose.material3.adaptive:adaptive-navigation" }
+androidx-compose-material3-adaptive-navigation-suite = { module = "androidx.compose.material3:material3-adaptive-navigation-suite" }
+androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+androidx-lifecycle-common = { group = "androidx.lifecycle", name = "lifecycle-common", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose" }
+androidx-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "androidx-work-runtime-ktx" }
+androidx-palette = { module = "androidx.palette:palette-ktx", version.ref = "androidx-palette-ktx" }
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
+koin-core = { module = "io.insert-koin:koin-core" }
+koin-android = { module = "io.insert-koin:koin-android" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose" }
+koin-androidx-compose-navigation = { module = "io.insert-koin:koin-androidx-compose-navigation" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 # Tests libraries:
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
