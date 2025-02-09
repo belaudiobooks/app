@@ -6,7 +6,7 @@
 //  Copyright © 2024 orgName. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
 import Shared
 
 struct BookDetails: Equatable, Identifiable {
@@ -26,10 +26,14 @@ extension BookDetails {
 }
 
 extension BookDetails {
-  init(bookDetails: Shared.BookDetails) {
+  init(bookDetails: Shared.BookDetails, colorProvider: (String) -> (Color, Color)) {
     uuid = bookDetails.uuid
     title = bookDetails.title
-    narrations = bookDetails.narrations.map { .init(narrationDetails: $0) }
+    narrations = bookDetails.narrations.map { .init(
+      narrationDetails: $0,
+      bookTitle: bookDetails.title,
+      authorsName: bookDetails.authors.map { author in author.name }.first ?? "",
+      colorProvider: colorProvider) }
     description = bookDetails.description_
     authors = bookDetails.authors.map { .init(author: $0) }
     tags = bookDetails.tags.map { $0.name }

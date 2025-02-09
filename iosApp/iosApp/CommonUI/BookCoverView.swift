@@ -18,7 +18,7 @@ struct BookCoverView: View {
       Text(book.title)
         .font(.caption)
         .lineLimit(2)
-      Text("will be added later")
+      Text(book.authorsName)
         .font(.caption2)
         .foregroundColor(.gray)
         .lineLimit(2)
@@ -42,8 +42,6 @@ struct BookCoverView: View {
         authorName: "Іван Свістулькін",
         title: "Доўгая дарога дадому",
         gradientColors: [.pink, .purple])],
-      description: "Description One",
-      authors: [],
-      tags: []),
+      authorsName: "Іван Свістулькін"),
     action: {_ in })
 }
