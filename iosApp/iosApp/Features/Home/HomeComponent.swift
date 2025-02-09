@@ -8,7 +8,6 @@
 
 import Combine
 import Foundation
-import Shared
 
 // MARK: Component
 
@@ -70,7 +69,7 @@ class HomeViewModel: ViewModel {
     Task {
       for await bookCovers in services.repositoryClient.repository.getNLatestNarrationsAsBookCovers(numberOfBookCovers: 8) {
         DispatchQueue.main.async {
-          self.state.newCategory = bookCovers.map { .init(bookCover: $0) }
+          self.state.newCategory = bookCovers.map { .init(bookCover: $0, gradientColorProvider: self.services.colorProvider.colors) }
         }
       }
     }
@@ -80,7 +79,10 @@ class HomeViewModel: ViewModel {
     Task {
       for await modernBooks in services.repositoryClient.repository.getBooksDetailsByTagId(id: 2) {
         DispatchQueue.main.async {
-          self.state.curatedCategories[0].books = Array(modernBooks.map { BookDetails(bookDetails: $0).bookCover }.prefix(8))
+          self.state.curatedCategories[0].books = Array(modernBooks.map { BookDetails(
+            bookDetails: $0,
+            colorProvider: self.services.colorProvider.colors)
+            .bookCover }.prefix(8))
         }
       }
     }
@@ -90,7 +92,10 @@ class HomeViewModel: ViewModel {
     Task {
       for await classicBooks in services.repositoryClient.repository.getBooksDetailsByTagId(id: 7) {
         DispatchQueue.main.async {
-          self.state.curatedCategories[1].books = Array(classicBooks.map { BookDetails(bookDetails: $0).bookCover }.prefix(8))
+          self.state.curatedCategories[1].books = Array(classicBooks.map { BookDetails(
+            bookDetails: $0,
+            colorProvider: self.services.colorProvider.colors)
+            .bookCover }.prefix(8))
         }
       }
     }
@@ -100,7 +105,10 @@ class HomeViewModel: ViewModel {
     Task {
       for await kidsBooks in services.repositoryClient.repository.getBooksDetailsByTagId(id: 9) {
         DispatchQueue.main.async {
-          self.state.curatedCategories[2].books = Array(kidsBooks.map { BookDetails(bookDetails: $0).bookCover }.prefix(8))
+          self.state.curatedCategories[2].books = Array(kidsBooks.map { BookDetails(
+            bookDetails: $0,
+            colorProvider: self.services.colorProvider.colors)
+            .bookCover }.prefix(8))
         }
       }
     }

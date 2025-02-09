@@ -11,9 +11,11 @@ import Foundation
 class Services {
   let router: Router
   let repositoryClient: RepositoryClient
+  let colorProvider: ColorProvider
   
-  init(router: Router, repositoryClient: RepositoryClient) {
+  init(router: Router, repositoryClient: RepositoryClient, colorProvider: ColorProvider) {
     self.router = router
     self.repositoryClient = repositoryClient
+    self.colorProvider = colorProvider 
   }
 }

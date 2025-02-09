@@ -14,13 +14,16 @@ struct BookCoverView: View {
   
   var body: some View {
     VStack(alignment: .leading) {
-      StackedBookCoverView(imageURLs: book.coverImageURL)
+      StackedBookCoverView(bookImages: book.bookImages)
       Text(book.title)
         .font(.caption)
-      Text("will be added later")
+        .lineLimit(2)
+      Text(book.authorsName)
         .font(.caption2)
         .foregroundColor(.gray)
+        .lineLimit(2)
     }
+    .frame(maxWidth: 150)
     .padding()
     .onTapGesture {
       action(book.id)
@@ -34,9 +37,11 @@ struct BookCoverView: View {
     book: BookCover(
       uuid: "1",
       title: "Book One",
-      coverImageURL: ["https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg"],
-      description: "Description One",
-      authors: [],
-      tags: []),
+      bookImages: [BookImage(
+        imageURL: "https://storage.googleapis.com/books_media/covers/liubits-noch-prava-patsukou.jpg",
+        authorName: "Іван Свістулькін",
+        title: "Доўгая дарога дадому",
+        gradientColors: [.pink, .purple])],
+      authorsName: "Іван Свістулькін"),
     action: {_ in })
 }
