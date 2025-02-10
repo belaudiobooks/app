@@ -33,31 +33,27 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlin.serialization)
             implementation(libs.kotlin.datetime)
-            implementation(libs.ktor.core)
             implementation(libs.kotlin.coroutines)
+            implementation(libs.ktor.core)
             implementation(libs.ktor.contentNegotiation)
             implementation(libs.ktor.contentEncoding)
             implementation(libs.ktor.json)
             implementation(libs.ktor.serialization)
             implementation(libs.sqldelight.runtime)
             implementation(libs.sqldelight.coroutines)
-            implementation(libs.androidx.lifecycle.viewmodel)
-            implementation(libs.androidx.lifecycle.runtime)
-            implementation(libs.androidx.lifecycle.common)
-            implementation(libs.koin.core)
-            implementation(libs.napier)
             implementation(libs.algolia.search)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
             implementation(libs.kotlin.coroutines.test)
-            implementation(libs.koin.test)
         }
         iosMain.dependencies {
                 implementation(libs.ktor.darwin)
                 implementation(libs.sqldelight.nativeDriver)
         }
         androidMain.dependencies {
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(libs.koin.core)
             implementation(libs.ktor.okhttp)
             implementation(libs.sqldelight.androidDriver)
         }

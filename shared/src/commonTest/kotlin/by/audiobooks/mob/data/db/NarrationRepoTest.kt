@@ -1,5 +1,6 @@
 package by.audiobooks.mob.data.db
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -26,6 +27,7 @@ class NarrationRepoTest {
         dbHelper.database.cleanUpDB()
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun narrationRepoTest() = runTest {
         val state = dbHelper.database.getAllNarrations(UnconfinedTestDispatcher()).stateIn(backgroundScope)
@@ -45,6 +47,7 @@ class NarrationRepoTest {
         assertEquals(4, state.value.size)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getNarrationsWithDetailsByBookUuidSubscriptionTest() = runTest {
         val unconfinedTestDispatcher = UnconfinedTestDispatcher()
@@ -68,6 +71,7 @@ class NarrationRepoTest {
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getNarrationsWithDetailsByBookUuidTest() = runTest {
         // Insert data snapshot & verify result got updated.
