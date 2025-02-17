@@ -9,6 +9,13 @@
 import SwiftUI
 import Combine
 import Foundation
+import UIKit
+
+enum AsyncImagePhase : Sendable {
+  case empty
+  case success(Image, originalImage: UIImage)
+  case failure(any Error)
+}
 
 class ImageLoader: ObservableObject {
   
@@ -54,7 +61,7 @@ class ImageLoader: ObservableObject {
         }
       }, receiveValue: {
         if let image = UIImage(data: $0.data) {
-          self.phase = .success(Image(uiImage: image))
+          self.phase = .success(Image(uiImage: image), originalImage: image)
         } else {
           self.phase = .failure(LoaderError.failedToDecodeFromData)
         }

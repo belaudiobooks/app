@@ -9,16 +9,17 @@
 import Combine
 import Foundation
 import SwiftUI
+import UIKit
 
 struct ABAsyncImageView<Content, L, E>: View where Content: View, L: View, E: View {
   @StateObject fileprivate var loader: ImageLoader
-  @ViewBuilder private var content: (Image) -> Content
+  @ViewBuilder private var content: (Image, UIImage) -> Content
   @ViewBuilder private var loading: () -> L
   @ViewBuilder private var error: () -> E
   
   init(
     url: URL?,
-    @ViewBuilder content: @escaping (Image) -> Content,
+    @ViewBuilder content: @escaping (Image, UIImage) -> Content,
     @ViewBuilder loading: @escaping () -> L,
     @ViewBuilder error: @escaping () -> E) {
     _loader = .init(wrappedValue: ImageLoader(url: url))
@@ -32,8 +33,8 @@ struct ABAsyncImageView<Content, L, E>: View where Content: View, L: View, E: Vi
       switch loader.phase {
       case .empty:
         loading()
-      case .success(let image):
-        content(image)
+      case .success(let image, let originalImage):
+        content(image, originalImage)
       case .failure:
         error()
       @unknown default:

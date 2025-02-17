@@ -24,7 +24,6 @@ struct BookCoverView: View {
         .lineLimit(2)
     }
     .frame(maxWidth: 150)
-    .padding()
     .onTapGesture {
       action(book.id)
     }
