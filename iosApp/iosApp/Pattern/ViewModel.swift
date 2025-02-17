@@ -29,10 +29,3 @@ extension ViewModel {
     state = newState
   }  
 }
-
-public protocol MutableUnorderedCollection {
-  associatedtype Element
-  func add(element: Element)
-  func remove(element: Element)
-  func count(for element: Element)
-}
