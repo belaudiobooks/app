@@ -15,7 +15,7 @@ struct BookCoverImageView: View {
     VStack(alignment: .leading) {
       ABAsyncImageView(
         url: URL(string: bookImage.imageURL),
-        content: { image in image.resizable()},
+        content: { image, _  in image.resizable()},
         loading: { ProgressView() },
         error: { FallbackView(
           authorName: bookImage.authorName,

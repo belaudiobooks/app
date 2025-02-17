@@ -9,19 +9,21 @@
 import SwiftUI
 import Shared
 
-struct BookRowView: View {
+struct BookRowView<Context: View>: View {
   var books: [BookCover]
-  var action: (String) -> Void
+  @ViewBuilder var context: (BookCover) -> Context
   
   var body: some View {
     ScrollView(.horizontal, showsIndicators: false) {
-      HStack(spacing: 0) {
+      HStack(spacing: 12) {
         ForEach(books) { book in
-          BookCoverView(book: book) { bookId in
-            action(bookId)
-          }
+          context(book)
         }
       }
+      .scrollTargetLayout()
     }
+    .padding(.horizontal, 12)
+    .padding(.vertical, 16)
+    .scrollTargetBehavior(.viewAligned)
   }
 }

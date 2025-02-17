@@ -16,15 +16,20 @@ struct HomeView: ComponentView {
       ScrollView(.vertical) {
         VStack {
           CategoryView(title: "New", onTapAction: nil) {
-            BookRowView(books: store.state.newCategory) { bookID in
-              store.handle(.selctedBookCover(id: bookID))
+            BookRowView(books: store.state.newCategory) { book in
+              BookGrandCoverView(
+                bookID: book.uuid,
+                bookImage: book.bookImages.first!,
+                action: { _ in store.handle(.selctedBookCover(id: book.uuid)) })
             }
           }
           
           ForEach(Array(store.state.curatedCategories.enumerated()), id: \.1.id) { index, category in
             CategoryView(title: category.name, onTapAction: { store.handle(.selectedCategory(sectionIndex: index + 1)) }) {
-              BookRowView(books: category.books) { bookID in
-                store.handle(.selctedBookCover(id: bookID))
+              BookRowView(books: category.books) { book in
+                BookCoverView(
+                  book: book,
+                  action: { _ in store.handle(.selctedBookCover(id: book.uuid)) })
               }
             }
           }
