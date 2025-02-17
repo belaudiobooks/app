@@ -1,5 +1,6 @@
 package by.audiobooks.mob.data.db
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -27,6 +28,7 @@ class BookRepoTest {
         dbHelper.database.cleanUpDB()
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getAllBooksTest() = runTest {
         val state = dbHelper.database.getAllBooks(UnconfinedTestDispatcher()).stateIn(backgroundScope)
@@ -46,6 +48,7 @@ class BookRepoTest {
         assertEquals(4, state.value.size)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getNLatestNarrationAsBookCoversTest() = runTest {
         val state = dbHelper.database.getNLatestNarrationAsBookCovers(4, UnconfinedTestDispatcher())
@@ -66,6 +69,7 @@ class BookRepoTest {
         assertEquals(4, state.value.size)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getBookByUuidTest() = runTest {
         // Insert test data
@@ -92,6 +96,7 @@ class BookRepoTest {
         assertEquals("Яшчэ Адна Кніга2", state.value.bookTitle)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getBooksByTagIdTest() = runTest {
         // Subscribe
@@ -110,6 +115,7 @@ class BookRepoTest {
         assertEquals(2, state.value.size)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getBookDetailsTest() = runTest {
         // Insert test data:
@@ -127,6 +133,7 @@ class BookRepoTest {
         assertEquals(2, state.value.tags.size)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getBooksDetailsByTagIdTest() = runTest {
         // Insert test data:
@@ -151,6 +158,7 @@ class BookRepoTest {
             true)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getBooksDetailsByPublisherUuidTest() = runTest {
         // Insert test data:
@@ -174,6 +182,7 @@ class BookRepoTest {
             true)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getBooksDetailsByAuthorUuidTest() = runTest {
         // Insert test data:
@@ -197,6 +206,7 @@ class BookRepoTest {
             true)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getBooksDetailsByTranslatorUuidTest() = runTest {
         // Insert test data:
@@ -221,6 +231,7 @@ class BookRepoTest {
             true)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getBooksDetailsByNarratorUuidTest() = runTest {
         // Insert test data:

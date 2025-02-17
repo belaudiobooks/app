@@ -1,5 +1,6 @@
 package by.audiobooks.mob.data.db
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -25,6 +26,7 @@ class LinkTypeRepoTest {
         dbHelper.database.cleanUpDB()
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun linkTypeRepoTest() = runTest {
         val state = dbHelper.database.getAllLinkTypes(UnconfinedTestDispatcher()).stateIn(backgroundScope)

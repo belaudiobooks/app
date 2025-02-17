@@ -1,5 +1,6 @@
 package by.audiobooks.mob.data.db
 
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -26,6 +27,7 @@ class TagFunctionsTest {
         dbHelper.database.cleanUpDB()
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getAllTagsTest() = runTest {
 
@@ -50,6 +52,7 @@ class TagFunctionsTest {
         assertEquals(4, state.value.size)
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getTagsByBookUuidSubscriptionTest() = runTest {
         // It is important to inject UnconfinedTestDispatcher() (implementation of TestDispatcher)
@@ -73,6 +76,7 @@ class TagFunctionsTest {
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getTagsByBookUuidTest() = runTest {
         // Insert test data
@@ -90,6 +94,7 @@ class TagFunctionsTest {
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun getTagByIdTest() = runTest {
         // Insert test data

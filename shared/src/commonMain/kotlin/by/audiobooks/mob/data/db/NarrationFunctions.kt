@@ -6,6 +6,7 @@ import by.audiobooks.mob.domain.Language
 import by.audiobooks.mob.domain.Narration
 import by.audiobooks.mob.domain.NarrationDetails
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
@@ -42,6 +43,7 @@ internal fun AudiobooksByDB.getNarrationsWithDetailsByBookUuidSubscription(bookU
 internal fun AudiobooksByDB.getNarrationsWithDetailsByBookUuid(bookUuid: String): List<NarrationDetails> =
     getNarrationsByBookUuid(bookUuid).map(::narrationToNarrationDetails)
 
+@OptIn(ExperimentalCoroutinesApi::class)
 private fun AudiobooksByDB.transformNarrationsFlowToNarrationsWithDetailsFlow(inboundFlow: Flow<List<Narration>>): Flow<List<NarrationDetails>> = flow {
     inboundFlow.collect {
         val transformedList = it.asFlow().flatMapMerge { narration ->
