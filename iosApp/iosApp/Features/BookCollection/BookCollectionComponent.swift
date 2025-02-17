@@ -35,7 +35,7 @@ class BookCollectionViewModel: ViewModel {
     
     Task {
       for await books in services.repositoryClient.repository.getBooksDetailsByTagId(id: arguments.categoryID) {
-        DispatchQueue.main.async {
+        await MainActor.run {
           self.state.books = books.map { BookDetails(
             bookDetails: $0,
             colorProvider: services.colorProvider.colors)

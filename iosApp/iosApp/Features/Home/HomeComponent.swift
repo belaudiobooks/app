@@ -74,7 +74,7 @@ class HomeViewModel: ViewModel {
   private func observeNewBooks() {
     Task {
       for await bookCovers in services.repositoryClient.repository.getNLatestNarrationsAsBookCovers(numberOfBookCovers: categoryMap[0]!) {
-        DispatchQueue.main.async {
+        await MainActor.run {
           self.state.newCategory = bookCovers.map { .init(bookCover: $0, gradientColorProvider: self.services.colorProvider.colors) }
         }
       }
@@ -84,7 +84,7 @@ class HomeViewModel: ViewModel {
   private func observeModernBooks() {
     Task {
       for await modernBooks in services.repositoryClient.repository.getBooksDetailsByTagId(id: categoryMap[1]!) {
-        DispatchQueue.main.async {
+        await MainActor.run {
           self.state.curatedCategories[0].books = Array(modernBooks.map { BookDetails(
             bookDetails: $0,
             colorProvider: self.services.colorProvider.colors)
@@ -97,7 +97,7 @@ class HomeViewModel: ViewModel {
   private func observeClassicBooks() {
     Task {
       for await classicBooks in services.repositoryClient.repository.getBooksDetailsByTagId(id: categoryMap[2]!) {
-        DispatchQueue.main.async {
+        await MainActor.run {
           self.state.curatedCategories[1].books = Array(classicBooks.map { BookDetails(
             bookDetails: $0,
             colorProvider: self.services.colorProvider.colors)
@@ -110,7 +110,7 @@ class HomeViewModel: ViewModel {
   private func observeKidsBooks() {
     Task {
       for await kidsBooks in services.repositoryClient.repository.getBooksDetailsByTagId(id: categoryMap[3]!) {
-        DispatchQueue.main.async {
+        await MainActor.run {
           self.state.curatedCategories[2].books = Array(kidsBooks.map { BookDetails(
             bookDetails: $0,
             colorProvider: self.services.colorProvider.colors)
