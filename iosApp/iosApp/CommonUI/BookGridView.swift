@@ -10,7 +10,7 @@ import SwiftUI
 
 struct BookGridView: View {
   private let columns = [
-    GridItem(.flexible()),
+    GridItem(.fixed(170)),
     GridItem(.flexible())
   ]
   

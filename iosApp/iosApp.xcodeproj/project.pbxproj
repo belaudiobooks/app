@@ -27,6 +27,9 @@
 		A53BA87D2D348B9B00DFBFAB /* ABAsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA87C2D348B9B00DFBFAB /* ABAsyncImageView.swift */; };
 		A53BA87F2D473CF700DFBFAB /* ColorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA87E2D473CF700DFBFAB /* ColorProvider.swift */; };
 		A53BA8812D474D7D00DFBFAB /* BookGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA8802D474D7D00DFBFAB /* BookGridView.swift */; };
+		A53BA8A42D58761900DFBFAB /* BookCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA8A32D58761900DFBFAB /* BookCollectionView.swift */; };
+		A53BA8A62D588AD400DFBFAB /* AggregateColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA8A52D588AD400DFBFAB /* AggregateColor.swift */; };
+		A53BA8A82D588C2500DFBFAB /* BookGrandImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BA8A72D588C2500DFBFAB /* BookGrandImageView.swift */; };
 		A562F5B52C8436D5005731B1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562F5B42C8436D5005731B1 /* ViewModel.swift */; };
 		A562F5B72C84374A005731B1 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562F5B62C84374A005731B1 /* Component.swift */; };
 		A562F5BD2C843BAB005731B1 /* HomeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A562F5BC2C843BAB005731B1 /* HomeComponent.swift */; };
@@ -66,6 +69,9 @@
 		A53BA87C2D348B9B00DFBFAB /* ABAsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ABAsyncImageView.swift; sourceTree = "<group>"; };
 		A53BA87E2D473CF700DFBFAB /* ColorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorProvider.swift; sourceTree = "<group>"; };
 		A53BA8802D474D7D00DFBFAB /* BookGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookGridView.swift; sourceTree = "<group>"; };
+		A53BA8A32D58761900DFBFAB /* BookCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCollectionView.swift; sourceTree = "<group>"; };
+		A53BA8A52D588AD400DFBFAB /* AggregateColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregateColor.swift; sourceTree = "<group>"; };
+		A53BA8A72D588C2500DFBFAB /* BookGrandImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookGrandImageView.swift; sourceTree = "<group>"; };
 		A562F5B42C8436D5005731B1 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		A562F5B62C84374A005731B1 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		A562F5BC2C843BAB005731B1 /* HomeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeComponent.swift; sourceTree = "<group>"; };
@@ -170,6 +176,7 @@
 		A53BA8742CEC5EB100DFBFAB /* BookCollection */ = {
 			isa = PBXGroup;
 			children = (
+				A53BA8A32D58761900DFBFAB /* BookCollectionView.swift */,
 				A53BA8752CEC5F0B00DFBFAB /* BookCollectionComponent.swift */,
 			);
 			path = BookCollection;
@@ -254,6 +261,7 @@
 				A562F5C42C850E3C005731B1 /* CategoryView.swift */,
 				A562F5C62C850E74005731B1 /* BookCoverView.swift */,
 				A50009A62CA3B7BA000E4A34 /* BookCoverImageView.swift */,
+				A53BA8A72D588C2500DFBFAB /* BookGrandImageView.swift */,
 				A50009A82CA3BAA1000E4A34 /* StackedBookCoverView.swift */,
 				A562F5C82C8514C6005731B1 /* BookRowView.swift */,
 				A53BA8672CE3202E00DFBFAB /* NarrationView.swift */,
@@ -277,6 +285,7 @@
 				A562F5D62C86D737005731B1 /* Services.swift */,
 				A50009AA2CAA5AA1000E4A34 /* RepositoryClient.swift */,
 				A53BA87E2D473CF700DFBFAB /* ColorProvider.swift */,
+				A53BA8A52D588AD400DFBFAB /* AggregateColor.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -406,12 +415,15 @@
 				A53BA8762CEC5F0B00DFBFAB /* BookCollectionComponent.swift in Sources */,
 				A53BA8662CE1CBBD00DFBFAB /* Author.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				A53BA8A62D588AD400DFBFAB /* AggregateColor.swift in Sources */,
+				A53BA8A42D58761900DFBFAB /* BookCollectionView.swift in Sources */,
 				A562F5D72C86D737005731B1 /* Services.swift in Sources */,
 				A50009A72CA3B7BA000E4A34 /* BookCoverImageView.swift in Sources */,
 				A562F5D42C867BFB005731B1 /* Router.swift in Sources */,
 				A562F5BF2C850576005731B1 /* HomeView.swift in Sources */,
 				A53BA8812D474D7D00DFBFAB /* BookGridView.swift in Sources */,
 				A562F5B52C8436D5005731B1 /* ViewModel.swift in Sources */,
+				A53BA8A82D588C2500DFBFAB /* BookGrandImageView.swift in Sources */,
 				A53BA87D2D348B9B00DFBFAB /* ABAsyncImageView.swift in Sources */,
 				A53BA87F2D473CF700DFBFAB /* ColorProvider.swift in Sources */,
 				A53BA8622CE1C99100DFBFAB /* BookDetails.swift in Sources */,

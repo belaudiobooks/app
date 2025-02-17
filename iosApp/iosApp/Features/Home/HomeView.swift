@@ -15,7 +15,7 @@ struct HomeView: ComponentView {
     NavigationView {
       ScrollView(.vertical) {
         VStack {
-          CategoryView(title: "New", onTapAction: { store.handle(.selectedCategory(sectionIndex: 0)) }) {
+          CategoryView(title: "New", onTapAction: nil) {
             BookRowView(books: store.state.newCategory) { bookID in
               store.handle(.selctedBookCover(id: bookID))
             }
@@ -30,8 +30,10 @@ struct HomeView: ComponentView {
           }
         }
       }
+      .padding(.top, 16)
       .navigationTitle("Books")
     }
     .navigationDestination(for: BookDetailsComponent.self) { $0.view }
+    .navigationDestination(for: BookCollectionComponent.self) { $0.view }
   }
 }

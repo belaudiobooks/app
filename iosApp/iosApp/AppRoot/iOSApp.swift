@@ -13,7 +13,7 @@ struct iOSApp: App {
     self.repositoryClient = RepositoryClient()
     let colorProvider = ColorProvider()
     services = Services(router: router, repositoryClient: repositoryClient, colorProvider: colorProvider)
-    homeComponent = HomeComponent(arguments: HomeArguments(), services: services, delegate: nil)
+    homeComponent = HomeComponent(arguments: HomeArguments(), services: services)
   }
   
   var body: some Scene {

@@ -11,7 +11,7 @@ import SwiftUI
 
 struct BookImage: Equatable {
   let imageURL: String
-  // Following data needed for a fallback state
+  // Defines fallback state
   let authorName: String
   let title: String
   let gradientColors: [Color]

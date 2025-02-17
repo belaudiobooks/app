@@ -28,11 +28,15 @@ struct CategoryView<Content: View>: View {
       HStack(spacing: 4) {
         Text(title)
           .font(._title3)
-        Spacer()
+        
         if onTapAction != nil {
           Image(systemName: "chevron.forward")
             .font(._iconSemibold)
+            .foregroundColor(.gray)
+            .padding(.leading, 8)
         }
+        
+        Spacer()
       }
       .padding(.horizontal, 20)
       .onTapGesture {
