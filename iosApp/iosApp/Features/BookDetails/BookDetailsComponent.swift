@@ -16,7 +16,7 @@ struct BookDetailsArguments {
   let bookID: String
 }
 
-class BookDetailsComponent: Component<BookDetailsArguments, Void, BookDetailsViewModel, BookDetailsView> {}
+class BookDetailsComponent: Component<BookDetailsArguments, BookDetailsViewModel, BookDetailsView> {}
 
 // MARK: MVVM
 
